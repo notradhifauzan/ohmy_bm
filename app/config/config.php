@@ -13,3 +13,5 @@
 
     //Site name
     define('SITENAME','Oh My Bm!');
+
+    //test
