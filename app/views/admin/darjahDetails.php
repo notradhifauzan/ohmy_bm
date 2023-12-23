@@ -25,16 +25,24 @@
 
     <!-- use this variable $data['summary'] to display the summary -->
     <!-- also allow the admin to edit this summary (maybe a button to edit) -->
-    <p>replace this p tag with proper div to display summary of bahasa melayu subject for this particular darjah</p>
-    <br>
+
+    <!-- Irfan: instead pakai button to edit pakai text box and tambah so that bila edit tu the text stays there for that particular topic / ke better lagi button edit ? -->
+
+    
     <h3>Ringkasan subjek bahasa melayu bagi Tahun <?php echo $data['darjahId']; ?></h3>
-    <p><?php echo $data['summary']; ?></p>
+    <div class = "">
+        <blockquote contenteditable="true">
+        <p><?php echo $data['summary']; ?></p>
+        </blockquote>
+    </div>
 
     <!-- this portion of code (FORM) will be hidden if there is already a notes for this particular darjah -->
     <?php if (empty($data['file'])) : ?>
         <form action="<?php echo URLROOT; ?>/admins/uploadSOW/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
-            <label for="pdfFile">Muta Naik Nota Tambahan: </label>
+            <label for="pdfFile">Muat Naik Nota Tambahan: </label>
             <input type="text" name="fileName" id="fileName" placeholder="Nama nota">
+            <br>
+            <br>
             <input type="file" name="pdfFile" id="nota-tambahan" accept=".pdf">
             <button type="submit">muat naik</button>
             <?php if (!empty($data['fileName_err'])) : ?>
