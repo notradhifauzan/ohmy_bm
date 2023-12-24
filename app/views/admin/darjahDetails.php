@@ -8,36 +8,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
+    
+    <style>
+        body {
+            background: url('<?php echo URLROOT;?>/assets/bgDetails.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
 </head>
 
 <body>
-    <!-- Darjah ${} ambil dari db -->
-    <h1 name="darjah_id">Darjah <?php echo $data['darjahId']; ?></h1>
-
-    <!-- dkt sini mesti ada satu ruang untuk admin tengok ada nota tambahan tak untuk subjek bm darjah 'n' ni -->
-    <?php if (!empty($data['file'])) : ?>
-        <div class="sow_container">
-            <p>there is a file for this darjah</p>
-            <p>allow admin to delete this file</p>
-            <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>">hapus fail</a>
-        </div>
-    <?php endif; ?>
-
-    <!-- use this variable $data['summary'] to display the summary -->
-    <!-- also allow the admin to edit this summary (maybe a button to edit) -->
-
-    <!-- Irfan: instead pakai button to edit pakai text box and tambah so that bila edit tu the text stays there for that particular topic / ke better lagi button edit ? -->
-
+    <div class = "title-head">
+        <img src="<?php echo URLROOT?>/assets/logo.jpg" alt = "img" >
+        <h1 class = "title-text">
+            SENARAI TOPIK
+        </h1>
+    </div>
+    <div class = "darjah-head-container">
+        <img src="<?php echo URLROOT?>/assets/ball.jpg" alt = "img" >
+    <div class = "centered">
+        <h1 name="darjah_id">Darjah <?php echo $data['darjahId']; ?></h1>
+    </div>
+        
+    </div>
+    <div class="details-head">
+        <!-- Darjah ${} ambil dari db -->
+       
+        <button class = "return-button">
+            <a href="<?php echo URLROOT; ?>/admins/home">Kembali Ke Halaman Utama</a>
+        </button> 
+    </div>
     
-    <h3>Ringkasan subjek bahasa melayu bagi Tahun <?php echo $data['darjahId']; ?></h3>
-    <div class = "">
-        <blockquote contenteditable="true">
-        <p><?php echo $data['summary']; ?></p>
-        </blockquote>
+    <div class="topic-head">
+    <h3>Bahan Rujukan Bagi Tahun <?php echo $data['darjahId']; ?></h3>
+
+    <div class = "topic-container">
+            Summary:
+            <div class = "summary-container">
+                <blockquote contenteditable="true">
+                    <p>Sample text
+                        <!--<?php echo $data['']; ?>-->
+                    </p>
+                </blockquote>
+                <button style="width: fit-content; margin-left: 25px " name = "update-summary" >
+                Test
+                </button>
+            </div>
+        <div class = "addtopic-container">
+        <button name="go-to-add-new" class = "tambah-button">
+            <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">Tambah Bahan Rujukan</a>
+        </button> 
+        </div>
+    </div>
     </div>
 
-    <!-- this portion of code (FORM) will be hidden if there is already a notes for this particular darjah -->
-    <?php if (empty($data['file'])) : ?>
+    <div class = "tambahan-nota-head">
+        <h3>Muat naik nota tambahan</h3>
+        <div class = "tambahan-nota-container">
+
+            <?php if (!empty($data['file'])) : ?>
+            <div class="sow_container">
+                <p>Samplefail.txt</p>
+                <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
+                    Hapus
+                </button></a>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($data['file'])) : ?>
         <form action="<?php echo URLROOT; ?>/admins/uploadSOW/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
             <label for="pdfFile">Muat Naik Nota Tambahan: </label>
             <input type="text" name="fileName" id="fileName" placeholder="Nama nota">
@@ -50,44 +90,24 @@
             <?php endif ?>
         </form>
     <?php endif; ?>
+        </div>
+    </div>    
 
-    <br><br>
-    <!-- 
+   
+    <div class = "topiclist-head">          
+        <h3>Senarai Nota Tambahan</h3>
+            <div class = "topiclist-container">
+            <?php foreach ($data['topicList'] as $topic) : ?>
+                <div class = "button-to-topic">
+                    <button >
+                        <a href=""><?php echo $topic->topicName; ?></a>
+                    </button>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>  
     
-    Bawah senarai topik ada satu div utk display preview topik apabila diclick: 
-    
-    <div>
-        <h1>
-            ${title}
-        </ah1>
-        <TextArea>
-            ${desc}
-        </TextArea>
-        <a href="pdf.">
-            ${link utk download }
-        </a>
-    </div>
-    -->
-    <h1>Senarai Topik</h1>
-    <!-- Each button akan ambil data dari DB and akan keluar button baru bila selesai add topik baru -->
-    <!-- display as table/grid or whatever, yang penting mesti ada topic name, download button, ruang untuk letak topic summary -->
-    <?php foreach ($data['topicList'] as $topic) : ?>
-        <button>
-            <a href=""><?php echo $topic->topicName; ?></a>
-        </button>
-    <?php endforeach ?>
-    <h3>Tambah topik: </h3>
-
-
-    <!-- Hantar Darjah ${} ke page tambah topik so that bila tambah dia akan according to Darjah ${}, tak sure perlu ke tak -->
-    <button name="go-to-add-new">
-        <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">Tambah Topik +</a>
-    </button>
-    <br><br>
-    <button>
-        <a href="<?php echo URLROOT; ?>/admins/home">Kembali</a>
-    </button>
-
+               
 </body>
 
 </html>
