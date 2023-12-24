@@ -1,20 +1,11 @@
 <style>
-
-.title-head {
-    padding: 25px;
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .title-head {
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 700;
-font-size: 32px;
-line-height: 75px;
-margin: 10px;
-/* identical to box height */
-display: flex;
-align-items: center;
-text-align: center;
+    padding: 25px;
 
 }
 
@@ -24,7 +15,7 @@ text-align: center;
   position: absolute;
   top: 0px;
   right: 0px;
-  font-size: 18px;
+  font-size: 25px;
   mix-blend-mode: multiply;
 }
 
@@ -39,53 +30,70 @@ text-align: center;
 
 .details-head {
     padding: 15px 35px;
-    font-size: 20px;
+    font-size: 25px;
    }
   
 .topic-head {
     padding: 15px 35px;
-    font-size: 16px;
+    font-size: 25px;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
     }    
     
 .topic-container {
-    width: fit-content;
+    width: 1000px;
     height: auto;
     padding: 15px 35px;
     border: 3px solid;
-    border-radius: 0px;
-    font-size: 16px;
+    font-size: 25px;
     display: flex;
-    }
+    background: linear-gradient(180deg, #E5EEFF 0%, #F9FBFF 100%);
+    border-radius: 32px;
+    
+}
 
 .tambahan-nota-head {
     padding: 15px 35px;
-    font-size: 16px;
-    }
+    font-size: 25px;
+    justify-content: center;
+    margin: auto;
+    width: 50%;    
+}
 
 .tambahan-nota-container {
     width: fit-content;
     height: auto;
     padding: 15px 35px;
     border: 3px solid;
-    border-radius: 0px;
-    font-size: 16px;
+    font-size: 25px;
     display: flex;
+    background: linear-gradient(180deg, #E5EEFF 0%, #F9FBFF 100%);
+    border-radius: 32px;
+    justify-content: center;
+    margin: auto;
+    width: 50%; 
     }
 
 .topiclist-head { 
     padding: 15px 35px;
-    font-size: 16px;
+    font-size: 25px;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
     }
 
 .topiclist-container {
-    width: fit-content;
+    width: 1000px;
     height: auto;
     padding: 15px 35px;
     border: 3px solid;
     border-radius: 0px;
-    font-size: 16px;
+    font-size: 25px;
     display: flex;
     flex-direction: row;
+     background: linear-gradient(180deg, #E5EEFF 0%, #F9FBFF 100%);
+    border-radius: 32px;
     }
 
 .button-to-topic {
@@ -94,17 +102,16 @@ text-align: center;
     
 .addtopic-head {
     padding: 15px 35px;
-    font-size: 16px;
+    font-size: 25px;
     }
 
 .addtopic-container {
     width: fit-content;
     height: fit-content;
     padding: 0px 5px;
-    font-size: 16px;
+    font-size: 25px;
     display: flex;
     flex-direction: column;
-   
     }
 
 .tambah-button {
@@ -114,7 +121,7 @@ text-align: center;
     padding: 15px 35px;
     border: 0 solid;
     border-radius: 16px;
-    font-size: 16px;
+    font-size: 25px;
     }
     
 .return-button {
@@ -125,16 +132,11 @@ text-align: center;
     margin-left: 1150px;
     border: 0 solid;
     border-radius: 16px;
-    font-size: 16px;
+    font-size: 25px;
     }
 
 .summary-container {
     display: flex;
     flex-direction: column;
     }
-
-    
-
-
-  
 </style>
