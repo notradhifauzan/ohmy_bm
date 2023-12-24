@@ -2,6 +2,7 @@
     /* controller.Users.php */
     class Users extends Controller{
         private $userModel;
+        private $tweetModel;
 
         public function __construct()
         {

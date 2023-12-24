@@ -5,6 +5,5 @@
         flex-direction: row;
         align-items: center;
         justify-content: end;
-
     }
 </style>
