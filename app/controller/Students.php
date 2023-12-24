@@ -2,10 +2,17 @@
 class Students extends Controller
 {
     private $studentModel;
+    private $adminModel;
 
     public function __construct()
     {
         $this->studentModel = $this->model('Student');
+        $this->adminModel = $this->model('Admin');
+
+        if(isset($_SESSION['current_controller'])){
+            unset($_SESSION['current_controller']);
+        }
+        $_SESSION['current_controller'] = 'student';
     }
 
     public function index()
@@ -86,7 +93,7 @@ class Students extends Controller
 
     public function home()
     {
-        return $this->view('admin/home');
+        return $this->view('student/home');
     }
 
     public function login()
@@ -148,6 +155,20 @@ class Students extends Controller
             ];
             return $this->view('student/login', $data);
         }
+    }
+
+    public function darjah($darjahId)
+    {
+        $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
+
+        $data = [
+            'darjahId' => $darjahId,
+            'topicList' => $this->adminModel->topicList($darjahId),
+            'summary' => $darjahObject->summary,
+            'file' => $darjahObject->pdf_notes
+        ];
+
+        return $this->view('student/darjahDetails', $data);
     }
 
     public function addPost()

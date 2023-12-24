@@ -22,7 +22,9 @@
 <body>
     <div class="title-head">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
-        <h1 class="">
+
+        <h1 class="title-text">
+
             SENARAI TOPIK
         </h1>
     </div>
@@ -48,8 +50,8 @@
             Summary:
             <div class="summary-container">
                 <blockquote contenteditable="true">
-                    <p>Sample text
-                        <!--<?php echo $data['']; ?>-->
+                    <p>
+                        <?php echo $data['summary']; ?>
                     </p>
                 </blockquote>
                 <button style="width: fit-content; margin-left: 25px " name="update-summary">
