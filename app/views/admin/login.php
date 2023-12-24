@@ -9,8 +9,24 @@
     <meta name="description" contents="About CM Cawley Biography website in PHP">
     <?php require APPROOT . '/views/admin/css/style_login.php'; ?>
 
+    <style>
+        body {
+            background: url('<?php echo URLROOT; ?>/assets/bg-login.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
 </head>
+
 <body>
+
+    <div class="navbar">
+        <div style="position: absolute; left: 100px ">
+            <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
+        </div>
+    </div>
+
     <div class="login-div">
         <img src="" alt="img" class="avatar">
 
@@ -41,7 +57,7 @@
             </div>
         </form>
 
-      
+
     </div>
 </body>
 

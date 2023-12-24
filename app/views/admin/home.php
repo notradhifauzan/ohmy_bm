@@ -11,15 +11,15 @@
 <body>
 
 
-<div class="navbar">
-    <div style="padding: 0 60px">
-        <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
-    </div>>
+    <div class="navbar">
+        <div style="padding: 0 60px">
+            <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
+        </div>
 
         <div style="padding-right: 0">
             <p>Hai Cikgu</p>
             <a href="userProfile.html">
-                <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" style="margin-left:30px"/>
+                <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" style="margin-left:30px" />
             </a>
         </div>
 

@@ -38,12 +38,12 @@ a {
     font-size: 25px;
     justify-content: center;
     margin: auto;
-    width: 50%;
+    width: 70%;
     }    
     
 .topic-container {
-    width: 1000px;
-    height: auto;
+    width: fit-content;
+    height: fit-content;
     padding: 15px 35px;
     border: 3px solid;
     font-size: 25px;
@@ -138,5 +138,7 @@ a {
 .summary-container {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    height: fit-content;
     }
 </style>

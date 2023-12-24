@@ -1,7 +1,5 @@
 <style>
     body {
-        /* Irfan: tak dapat letak background */
-        background: url('');
         height: 100%;
         width: 100%;
         display: flex;
