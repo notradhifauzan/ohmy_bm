@@ -1,6 +1,8 @@
 <?php
 class Admins extends Controller
 {
+    private $adminModel;
+    
     public function __construct()
     {
         /**

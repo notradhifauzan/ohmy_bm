@@ -10,13 +10,14 @@
     <?php require APPROOT . '/views/admin/css/style_login.php'; ?>
 
 </head>
+
 <body>
     <div class="login-div">
         <img src="" alt="img" class="avatar">
 
         <p>Daftar Bersama Kami</p>
 
-        <form action="<?php echo URLROOT ?>/admins/login" method="POST">
+        <form action="<?php echo URLROOT ?>/students/register" method="POST">
             <div class="formcontainer">
                 <label for="username">
                     New Username
@@ -30,7 +31,10 @@
                 <label for="email">
                     Email
                 </label>
-                <input value="" type="text" placeholder="enter email" password" required>
+                <input value="<?php echo $data['email'] ?>" type="text" placeholder="enter email" name="email" required>
+                <?php if (!empty($data['email_err'])) : ?>
+                    <span style="color: red"><?php echo $data['email_err']; ?></span><br>
+                <?php endif ?>
 
                 <label for="password">
                     New Password
@@ -42,10 +46,13 @@
                 <?php endif ?>
 
                 <!-- Irfan : bila user salah key in tak sama password dgn yang atas keluar error -->
-                <label for="password">
+                <label for="confirm_password">
                     Confirm Password
                 </label>
-                <input value="" type="password" placeholder="enter password" name="password" required>
+                <input value="<?php echo $data['confirm_password'] ?>" type="password" placeholder="confirm password" name="confirm_password" required>
+                <?php if (!empty($data['confirm_password_err'])) : ?>
+                    <span style="color: red"><?php echo $data['confirm_password_err']; ?></span>
+                <?php endif ?>
 
                 <div class="buttoncontainer">
                     <button type="submit">Register</button>
