@@ -1,3 +1,4 @@
+
 <?php
     //DB params
     define('DB_HOST','localhost');
@@ -14,4 +15,3 @@
     //Site name
     define('SITENAME','Oh My Bm!');
 
-    //test
