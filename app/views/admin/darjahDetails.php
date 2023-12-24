@@ -22,7 +22,9 @@
 <body>
     <div class="title-head">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
+
         <h1 class="title-text">
+
             SENARAI TOPIK
         </h1>
     </div>
