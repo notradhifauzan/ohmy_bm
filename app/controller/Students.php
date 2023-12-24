@@ -91,21 +91,67 @@ class Students extends Controller
 
     public function login()
     {
-        $data = [
-            'username' => '',
-            'email' => '',
-            'password' => '',
-            'confirm_password' => '',
-
-            'username_err' => '',
-            'email_err' => '',
-            'password_err' => '',
-            'confirm_password_err' => '',
-        ];
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //process the login form
+            //sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            //init data
+            $data = [
+                'username' => trim($_POST['username']),
+                'password' => trim($_POST['password']),
+
+                'username_err' => '',
+                'password_err' => '',
+            ];
+
+
+            if (empty($data['username'])) {
+                $data['username_err'] = 'Sila masukkan nama pengguna';
+            }
+
+            if (empty($data['password'])) {
+                $data['password_err'] = 'Sila masukkan kata laluan';
+            }
+
+            //check for user/mail
+            if ($this->studentModel->isUsernameExist($data['username'])) {
+                //user found
+            } else {
+                $data['username_err'] = 'Tiada maklumat pengguna dalam pangkalan data';
+            }
+
+            //make sure errors are empty
+            if (empty($data['username_err']) && empty($data['password_err'])) {
+                //validated
+                //Check and set logged in user
+
+                $loggedInUser = $this->studentModel->login($data);
+                if ($loggedInUser) {
+                    //create session
+                    redirect('students/home');
+                } else {
+                    $data['password_err'] = 'Kata laluan salah';
+                    $this->view('student/login', $data);
+                }
+            } else {
+                //Load view with errors
+                $this->view('student/login', $data);
+            }
         } else {
+            //init data
+            $data = [
+                'username' => '',
+                'password' => '',
+
+                'username_err' => '',
+                'password_err' => '',
+            ];
             return $this->view('student/login', $data);
         }
+    }
+
+    public function addPost()
+    {
+        
     }
 }

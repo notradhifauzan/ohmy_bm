@@ -16,7 +16,7 @@
 
         <p>Selamat Kembali</p>
 
-        <form action="<?php echo URLROOT ?>/admins/login" method="POST">
+        <form action="<?php echo URLROOT ?>/students/login" method="POST">
             <div class="formcontainer">
                 <label for="username">
                     Username
