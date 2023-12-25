@@ -116,7 +116,7 @@
         </div>
     </div>
     <div class="rtn_btn">
-        <a href="<?php echo URLROOT; ?>/admins/home">
+        <a href="<?php echo URLROOT; ?>/students/home">
             <button>Kembali Ke Halaman Utama </button>
         </a>
 
