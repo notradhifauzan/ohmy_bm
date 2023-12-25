@@ -25,19 +25,20 @@
             <div class="t_d_p1_c1">
 
                 <?php if (!empty($data['file'])) : ?>
-                    <div class="sow_container">
+                    <div class="">
                         <p><?php echo $data['file_name'] ?></p>
                         <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
                                 Hapus
-                            </button></a>
+                            </button>
+                        </a>
                     </div>
                 <?php endif; ?>
 
                 <?php if (empty($data['file'])) : ?>
                     <form action="<?php echo URLROOT; ?>/admins/uploadSOW/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
-                    <h2>Buku Teks Bahasa Melayu Darjah <?php echo $data['darjahId']; ?></h2>
+                        <h2>Buku Teks Bahasa Melayu Darjah <?php echo $data['darjahId']; ?></h2>
                         <label for="nota-tambahan">
-                        
+
                             <div class="ic_upload">
                                 <svg id='Upload_to_the_Cloud_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                                     <rect width='48' height='48' stroke='none' fill='#555' opacity='0' />
@@ -68,7 +69,7 @@
             </div>
 
             <div class="t_d_p1_c2">
-                <textarea cols="65" rows="10" contenteditable="true">  
+                <textarea cols="65" rows="10" contenteditable="true">
                         <?php echo $data['summary']; ?>
                 </textarea>
                 <button style="width: fit-content; margin-left: 14px " name="update-summary">
@@ -103,9 +104,12 @@
         </div>
         <div class="add_notes">
             <p>Tambah Nota</p>
-            <button name="go-to-add-new">
-                <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">+</a>
-            </button>
+
+            <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">
+                <button name="go-to-add-new">
+                    +
+                </button>
+            </a>
         </div>
     </div>
 

@@ -191,6 +191,17 @@
         justify-content: center;
     }
 
+    .grid_topic_list_1 {
+        width: 100%;
+        display: block;
+        margin: 50px 0;
+        grid-template-columns: auto auto auto;
+        gap: 25px;
+        align-items: center;
+        justify-content: center;
+    }
+
+
     .grid_topic_list button {
         width: 200px;
         height: 100px;
@@ -229,6 +240,15 @@
     .rtn_btn{
         margin: 50px;
     }
+    
+    .container_1 {
+            background-color: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            width: fit-content;
+            height: fit-content;
+            margin: fit-content;
+        }
     
     .container {
             background-color: #ddd;
