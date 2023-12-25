@@ -74,17 +74,16 @@
             </svg>
         </div>
 
-        <h2>Senarai Nota Tambahan</h2>
+        <h2>Senarai Bahan Pembelajaran</h2>
         <div class="t_d_p1_c">
 
             <div class="grid_topic_list">
 
                 <?php foreach ($data['topicList'] as $topic) : ?>
                     <div class="button-to-topic">
-                        <a href=""><button><?php echo $topic->topicName; ?>
+                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?>
                             </button></a>
                     </div>
-
                 <?php endforeach ?>
 
             </div>

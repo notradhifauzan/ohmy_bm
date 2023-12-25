@@ -2,7 +2,7 @@
 class Admins extends Controller
 {
     private $adminModel;
-    
+
     public function __construct()
     {
         /**
@@ -77,10 +77,22 @@ class Admins extends Controller
         }
     }
 
+    public function deleteMaterials($topicId)
+    {
+        //http://localhost:8001/ohmy_bm/admins/deleteMaterials/1?darjahId=1
+        $darjahId = $_GET['darjahId'];
+        if (!empty($darjahId) && !empty($topicId)) {
+            $this->adminModel->deleteMaterials($topicId);
+            redirect('admins/darjah/' . $darjahId);
+        } else {
+            die('some values went missing');
+        }
+    }
+
     public function deleteSOW($darjahId)
     {
         $this->adminModel->deleteSOW($darjahId);
-        redirect('admins/darjah/'.$darjahId);
+        redirect('admins/darjah/' . $darjahId);
     }
 
     public function uploadSOW($darjahId)
@@ -121,7 +133,7 @@ class Admins extends Controller
 
                         // Store file information in the database
                         if ($this->adminModel->uploadSOW($data)) {
-                            redirect('admins/darjah/'.$darjahId);
+                            redirect('admins/darjah/' . $darjahId);
                         } else {
                             die('failed to stored pdf to database');
                         }
