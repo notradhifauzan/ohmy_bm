@@ -97,7 +97,6 @@
                     <div class="button-to-topic">
                         <a href=""><button><?php echo $topic->topicName; ?></button></a>
                     </div>
-
                 <?php endforeach ?>
 
             </div>
