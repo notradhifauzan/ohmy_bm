@@ -67,7 +67,6 @@
     .form_container {
         width: 80%;
         max-width: 1200px;
-        height: 70%;
         min-height: 480px;
         min-width: none;
         padding: 20px;
@@ -128,6 +127,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .form_c2:hover{
+        cursor: pointer;
     }
 
     button {
