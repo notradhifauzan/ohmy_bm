@@ -78,6 +78,7 @@
         justify-content: center;
         transition: 300ms;
     }
+
     label:hover {
         cursor: pointer;
         background-color: #EEE;
@@ -199,6 +200,13 @@
         color: white;
     }
 
+    .notes {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
     .add_notes {
         width: 100%;
         display: flex;
@@ -206,7 +214,20 @@
         justify-content: end;
     }
 
+    .delete_notes {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
     .add_notes button {
+        border: #3f3d56 2px solid;
+        color: #3f3d56;
+        background-color: #FFFA;
+    }
+
+    .delete_notes button {
         border: #3f3d56 2px solid;
         color: #3f3d56;
         background-color: #FFFA;
@@ -217,9 +238,18 @@
         font-weight: bold;
         font-size: 2rem;
         color: #3f3d56;
+        padding: 10px;
     }
 
-    .rtn_btn{
+    .delete_notes p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 2rem;
+        color: #3f3d56;
+        padding: 10px;
+    }
+
+    .rtn_btn {
         margin: 50px;
     }
 </style>

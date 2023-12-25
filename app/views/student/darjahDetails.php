@@ -90,6 +90,18 @@
             </div>
         </div>
 
+           
+            <div class="download_notes">
+                <p>Muat Turun</p>
+
+                <a >
+                    <button name="">
+                        +
+                    </button>
+                </a>
+            </div>
+       
+
         <div class="t_d_p1_c">
             <div class="container_1">
                 <div class="comment-container">
