@@ -47,8 +47,7 @@
                 <?php endif; ?>
 
                 <?php if (empty($data['file'])) : ?>
-                    <h2>Buku Teks Bahasa Melayu Darjah <?php echo $data['darjahId']; ?></h2>
-
+                    <h4>Tiada buku teks dimuat naik</h4>
                     <?php if (!empty($data['fileName_err'])) : ?>
                         <span style="color: red">*<?php echo $data['fileName_err']; ?></span><br>
                     <?php endif ?>

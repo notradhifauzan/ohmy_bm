@@ -183,6 +183,7 @@ class Students extends Controller
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
             'file' => $darjahObject->pdf_notes,
+            'file_name' => $darjahObject->pdf_name,
             'feedbacks' => $feedbacks
         ];
 

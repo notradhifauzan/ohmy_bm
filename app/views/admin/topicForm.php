@@ -12,7 +12,7 @@
 
     <div class="form_container">
         <div class="form_header">
-            <h1>Tambah Topik: Darjah <?php echo $data['darjahId'] ?></h1>
+            <h1>Tambah Bahan Pembelajaran: Darjah <?php echo $data['darjahId'] ?></h1>
 
             <a href="<?php echo URLROOT; ?>/admins/darjah/<?php echo $data['darjahId']; ?>">
                 <svg id='Delete_32' width='28' height='28' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
@@ -27,7 +27,7 @@
         <form action="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
             <div class="form_c">
                 <div class="form_c1">
-                    <h3>Tajuk Topik</h3>
+                    <h3>Tajuk Bahan</h3>
                     <input value="<?php echo $data['topicName']; ?>" type="text" placeholder="isi tajuk" name="topicName">
 
                     <?php if (!empty($data['topicName_err'])) : ?>
