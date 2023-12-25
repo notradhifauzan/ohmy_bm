@@ -78,6 +78,7 @@
         justify-content: center;
         transition: 300ms;
     }
+
     label:hover {
         cursor: pointer;
         background-color: #EEE;
@@ -159,6 +160,7 @@
         flex-direction: column;
         align-items: start;
     }
+
     .t_d_p1_c3 {
         margin: 100;
         width: 70%;
@@ -217,6 +219,27 @@
         color: white;
     }
 
+    .download_notes {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 50px;
+    }
+
+    .download_notes button {
+        border: #3f3d56 2px solid;
+        color: #3f3d56;
+        background-color: #FFFA;
+    }
+
+    .download_notes p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 2rem;
+        color: #3f3d56;
+    }
+
     .add_notes {
         width: 100%;
         display: flex;
@@ -237,78 +260,78 @@
         color: #3f3d56;
     }
 
-    .rtn_btn{
+    .rtn_btn {
         margin: 50px;
     }
-    
+
     .container_1 {
-            background-color: #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            width: fit-content;
-            height: fit-content;
-            margin: fit-content;
-        }
-    
+        background-color: #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        width: fit-content;
+        height: fit-content;
+        margin: fit-content;
+    }
+
     .container {
-            background-color: #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            width: fit-content;
-            margin: 50px auto;
-        }
+        background-color: #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        width: fit-content;
+        margin: 50px auto;
+    }
 
-        .comment-container {
-            display: flex;
-            align-items: center;
-            width: fit-content;
-            justify-content: space-between;
-            
-        }
+    .comment-container {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        justify-content: space-between;
 
-        .avatar {
-            width: 50px;
-            height: 50px;
-            background: #2da1e0;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+    }
 
-        .comment-input {
-            background-color: aliceblue;
-            border: 0;
-            border-radius: 50px;
-            width: 300px;
-            height: 35px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+    .avatar {
+        width: 50px;
+        height: 50px;
+        background: #2da1e0;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
 
-        .comment-button {
-            background-color: #4091ed;
-            border: 0;
-            border-radius: 50px;
-            width: 120px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px;
-        }
+    .comment-input {
+        background-color: aliceblue;
+        border: 0;
+        border-radius: 50px;
+        width: 300px;
+        height: 35px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
 
-        .text {
-            color: white;
-            margin: 0;
-        }
-        
-        .username {
-            cursor: pointer;
-            display: flex;
-            margin: 25px;
-            padding-left: 50px;
-            margin-bottom: 85px;
-            position: absolute;
-            
-        }
+    .comment-button {
+        background-color: #4091ed;
+        border: 0;
+        border-radius: 50px;
+        width: 120px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .text {
+        color: white;
+        margin: 0;
+    }
+
+    .username {
+        cursor: pointer;
+        display: flex;
+        margin: 25px;
+        padding-left: 50px;
+        margin-bottom: 85px;
+        position: absolute;
+
+    }
 </style>

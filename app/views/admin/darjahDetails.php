@@ -98,8 +98,17 @@
                         <a href=""><button><?php echo $topic->topicName; ?></button></a>
                     </div>
                 <?php endforeach ?>
-
             </div>
+        </div>
+        
+        <div class="notes">
+        <div class="delete_notes">
+            <p>Hapus Nota</p>
+            <a>
+                <button name="remove">
+                    -
+                </button>
+            </a>
         </div>
         <div class="add_notes">
             <p>Tambah Nota</p>
@@ -109,6 +118,7 @@
                     +
                 </button>
             </a>
+        </div>
         </div>
     </div>
 
