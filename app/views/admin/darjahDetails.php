@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
 
 </head>
@@ -28,7 +29,7 @@
                     <div class="">
                         <p><?php echo $data['file_name'] ?></p>
                         <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
-                                Hapus
+                                Padam
                             </button>
                         </a>
                     </div>
@@ -88,37 +89,36 @@
             </svg>
         </div>
 
-        <h2>Senarai Nota Tambahan</h2>
+        <h2>Senarai Bahan Pembelajaran</h2>
         <div class="t_d_p1_c">
-
             <div class="grid_topic_list">
-
                 <?php foreach ($data['topicList'] as $topic) : ?>
                     <div class="button-to-topic">
-                        <a href=""><button><?php echo $topic->topicName; ?></button></a>
+                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?></button></a>
                     </div>
+                    
                 <?php endforeach ?>
             </div>
         </div>
-        
-        <div class="notes">
-        <div class="delete_notes">
-            <p>Hapus Nota</p>
-            <a>
-                <button name="remove">
-                    -
-                </button>
-            </a>
-        </div>
-        <div class="add_notes">
-            <p>Tambah Nota</p>
 
-            <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">
-                <button name="go-to-add-new">
-                    +
-                </button>
-            </a>
-        </div>
+        <div class="notes">
+            <div class="delete_notes">
+                <p>Padam</p>
+                <a>
+                    <button name="remove">
+                        -
+                    </button>
+                </a>
+            </div>
+            <div class="add_notes">
+                <p>Tambah Nota</p>
+
+                <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">
+                    <button name="go-to-add-new">
+                        +
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 

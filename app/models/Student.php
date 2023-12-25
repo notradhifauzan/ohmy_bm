@@ -84,6 +84,24 @@ class Student
         return $this->db->resultSet();
     }
 
+    public function downloadNotes($topicId)
+    {
+        $this->db->query('SELECT * FROM topic WHERE topicId = :topicId');
+        $this->db->bind(':topicId', $topicId);
+        $result = $this->db->single();
+
+        if ($result) {
+            $data = [
+                'pdfContent' => $result->pdf_content,
+                'pdfName' => $result->topicName
+            ];
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
     public function addFeedbacks($data)
     {
         $this->db->query('insert into posts (userId,darjahId,post) values (:userId,:darjahId,:post);');

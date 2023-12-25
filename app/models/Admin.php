@@ -40,6 +40,13 @@ class Admin
         }
     }
 
+    public function deleteMaterials($topicId)
+    {
+        $this->db->query('delete from topic where topicId=:topicId;');
+        $this->db->bind(':topicId',$topicId);
+        $this->db->execute();
+    }
+
     public function testStorePdf($topicName, $fileContent)
     {
         $this->db->query('INSERT INTO topic (topicName, pdf_content, darjahId) VALUES (:topicName, :fileContent, :darjahId)');
