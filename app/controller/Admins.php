@@ -219,7 +219,8 @@ class Admins extends Controller
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
-            'file' => $darjahObject->pdf_notes
+            'file' => $darjahObject->pdf_notes,
+            'file_name' => $darjahObject->pdf_name
         ];
 
         return $this->view('admin/darjahDetails', $data);
