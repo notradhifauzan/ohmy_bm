@@ -27,7 +27,7 @@
 
                 <?php if (!empty($data['file'])) : ?>
                     <div class="sow_container">
-                        <p>Samplefile.txt</p>
+                        <p><?php echo $data['file_name'] ?></p>
                         <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
                                 Hapus
                             </button></a>
