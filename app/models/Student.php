@@ -69,4 +69,32 @@ class Student
             return false;
         }
     }
+
+    public function getFeedbacksFromDarjah($darjahId)
+    {
+        $this->db->query('SELECT posts.postId, student.username, posts.darjahId, posts.post, posts.date_created
+        FROM posts
+        JOIN student ON posts.userId = student.studentId
+        WHERE posts.darjahId = :darjahId
+        ORDER BY posts.date_created DESC;');
+
+        $this->db->bind(':darjahId',$darjahId);
+        $this->db->execute();
+
+        return $this->db->resultSet();
+    }
+
+    public function addFeedbacks($data)
+    {
+        $this->db->query('insert into posts (userId,darjahId,post) values (:userId,:darjahId,:post);');
+        $this->db->bind(':userId',$data['userId']);
+        $this->db->bind(':darjahId',$data['darjahId']);
+        $this->db->bind(':post',$data['post']);
+
+        if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

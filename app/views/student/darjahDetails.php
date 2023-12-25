@@ -99,20 +99,25 @@
         <div class="t_d_p1_c3">
             <div class="container">
                 <div class="comment-container">
-                    <div class="avatar"></div>
-                    <input type="text" placeholder="Add a comment.." class="comment-input">
-                    <button type="submit" class="comment-button">
-                        <p class="text">Add comment</p>
-                    </button>
+                    <form action="<?php echo URLROOT; ?>/students/addFeedbacks/<?php echo $data['darjahId']; ?>" method="POST">
+                        <div class="avatar"></div>
+                        <input type="text" name="feedback" placeholder="Add a comment.." class="comment-input">
+                        <button type="submit" class="comment-button">
+                            <p class="text">Add comment</p>
+                        </button>
+                    </form>
                 </div>
             </div>
-            <div class="container">
-                <div class="comment-container">
-                    <div class="avatar"></div>
-                    <div class="username" name="">${username} + ${time}</div>
-                    <p type="text" placeholder="Add a comment.." class="comment-input">${comments}</p>
+            <?php foreach ($data['feedbacks'] as $feedbacks) : ?>
+                <div class="container">
+                    <div class="comment-container">
+                        <div class="avatar"></div>
+                        <div class="username" name="">dari <?php echo $feedbacks->username ?> | <?php echo getTimeInterval($feedbacks->date_created); ?></div>
+                        <p type="text" placeholder="Add a comment.." class="comment-input"><?php echo $feedbacks->post; ?></p>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
+
         </div>
     </div>
     <div class="rtn_btn">

@@ -9,7 +9,7 @@ class Students extends Controller
         $this->studentModel = $this->model('Student');
         $this->adminModel = $this->model('Admin');
 
-        if(isset($_SESSION['current_controller'])){
+        if (isset($_SESSION['current_controller'])) {
             unset($_SESSION['current_controller']);
         }
         $_SESSION['current_controller'] = 'student';
@@ -78,7 +78,7 @@ class Students extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 // proceed to register this student
                 if ($this->studentModel->register($data)) {
-                    redirect('students/home');
+                    redirect('students/login');
                 } else {
                     die('fail to register student, something went wrong');
                 }
@@ -93,7 +93,17 @@ class Students extends Controller
 
     public function home()
     {
+        $this->isLoggedIn();
         return $this->view('student/home');
+    }
+
+    public function logout()
+    {
+        if (isset($_SESSION['current_user'])) {
+            unset($_SESSION['current_user']);
+        }
+
+        redirect('students/login');
     }
 
     public function login()
@@ -135,6 +145,10 @@ class Students extends Controller
                 $loggedInUser = $this->studentModel->login($data);
                 if ($loggedInUser) {
                     //create session
+                    if (isset($_SESSION['current_user'])) {
+                        unset($_SESSION['current_user']);
+                    }
+                    $_SESSION['current_user'] = $loggedInUser;
                     redirect('students/home');
                 } else {
                     $data['password_err'] = 'Kata laluan salah';
@@ -159,20 +173,71 @@ class Students extends Controller
 
     public function darjah($darjahId)
     {
+        $this->isLoggedIn();
+
         $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
+        $feedbacks = $this->studentModel->getFeedbacksFromDarjah($darjahId);
 
         $data = [
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
-            'file' => $darjahObject->pdf_notes
+            'file' => $darjahObject->pdf_notes,
+            'feedbacks' => $feedbacks
         ];
 
         return $this->view('student/darjahDetails', $data);
     }
 
-    public function addPost()
+    public function addFeedbacks($darjahId)
     {
-        
+        $this->isLoggedIn();
+        // get student id from session
+        if (isset($_SESSION['current_user'])) {
+            $currentUser = $_SESSION['current_user'];
+        }
+        $studentId = $currentUser->studentId;
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'post' => trim($_POST['feedback']),
+                'darjahId' => $darjahId,
+                'userId' => $studentId,
+
+                'post_err' => '',
+                'darjahId_err' => '',
+                'userId_err' => ''
+            ];
+
+            if (empty($data['post'])) {
+                $data['post_err'] = 'Sila tinggalkan maklum balas dalam ruangan yang disediakan';
+            }
+
+            if (empty($data['darjahId'])) {
+                $data['darjahId_err'] = 'darjahId should not be empty';
+                die('something went wrong, darjahId should not be empty');
+            }
+
+            if (empty($data['userId'])) {
+                $data['userId_err'] = 'userId should not be empty';
+                die('something went wrong, userId should not be empty');
+            }
+
+            if (empty($data['post_err']) && empty($data['darjahId_err']) && empty($data['userId_err'])) {
+                // proceed to add this feedbacks to database
+                if($this->studentModel->addFeedbacks($data)){
+                    redirect('students/darjah/'.$darjahId);
+                } else {
+                    die('something went wrong, could not store the feedbacks to the database');
+                }
+            }
+        }
+    }
+
+    private function isLoggedIn()
+    {
+        if (!isset($_SESSION['current_user'])) {
+            redirect('students/login');
+        }
     }
 }
