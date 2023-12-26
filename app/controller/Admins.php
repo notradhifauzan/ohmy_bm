@@ -15,6 +15,7 @@ class Admins extends Controller
          * 
          */
         $this->adminModel = $this->model('Admin');
+        $this->studentModel = $this->model('Student');
     }
 
     public function topicForm($darjahId)
@@ -310,4 +311,13 @@ class Admins extends Controller
             $this->view('admin/login', $data);
         }
     }
+    public function logout()
+    {
+        if (isset($_SESSION['current_user'])) {
+            unset($_SESSION['current_user']);
+        }
+
+        redirect('admins/login');
+    }
 }
+
