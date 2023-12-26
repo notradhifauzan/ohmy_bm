@@ -46,7 +46,6 @@
                     <div class="button_mid">
                         <button type="submit" name="submit-new-topic">Tambah</button>
                     </div>
-
                 </div>
 
                 <label class="form_c2" for="upload-new-file">
@@ -59,20 +58,17 @@
                             </g>
                         </svg>
                     </div>
+
+                    <input type="file" name="pdfFile" id="upload-new-file" accept=".pdf">
+                    <?php if (!empty($data['fileName_err'])) : ?>
+                        <span style="color: red"><?php echo $data['fileName_err']; ?></span>
+                    <?php endif ?>
                     Click here to upload
                 </label>
-
-
-
-                <input type="file" name="pdfFile" id="upload-new-file" accept=".pdf">
-                <?php if (!empty($data['fileName_err'])) : ?>
-                    <span style="color: red"><?php echo $data['fileName_err']; ?></span>
-                <?php endif ?>
 
             </div>
         </form>
     </div>
-
 
 </body>
 

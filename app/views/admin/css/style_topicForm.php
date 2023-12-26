@@ -36,7 +36,8 @@
         font-weight: medium;
         padding: 5px 10px;
     }
-    span{
+
+    span {
         font-size: 0.9rem;
     }
 
@@ -46,11 +47,11 @@
         padding: 10px;
     }
 
-    #upload-new-file{
-        display: none;
+    #upload-new-file {
+        display: display;
     }
 
-    textarea{
+    textarea {
         width: 82.5%;
         font-size: 1rem;
     }
@@ -59,7 +60,7 @@
         width: fit-content;
     }
 
-    form{
+    form {
         width: 100%;
         height: 100%;
     }
@@ -129,7 +130,7 @@
         justify-content: center;
     }
 
-    .form_c2:hover{
+    .form_c2:hover {
         cursor: pointer;
     }
 
@@ -155,7 +156,7 @@
 
     }
 
-    button:hover{
+    button:hover {
         background-color: #555;
         color: #FFF;
     }

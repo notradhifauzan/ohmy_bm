@@ -109,7 +109,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        
+
     }
 
 
@@ -162,6 +162,65 @@
         align-items: start;
     }
 
+    .t_d_p2 {
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .t_d_p3 {
+        margin: 30px;
+        display: flex;
+        height: auto;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fafcff;
+
+        padding: 20px 0;
+
+        h2 {
+            font-weight: 500;
+
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: #2da1e0;
+            border-radius: 50%;
+        }
+
+
+        input {
+            background-color: aliceblue;
+            border: 0;
+            border-radius: 50px;
+            width: calc(100% - 200px);
+            height: 40px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            margin: 0 15px;
+        }
+
+        input:focus {
+            border: none;
+            outline: none;
+        }
+
+        button {
+            align-self: right;
+            padding: 0px 15px;
+            color: #FFF;
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+    }
+
 
     .tahun_head_container {
         padding: 30px 30px 20px;
@@ -175,6 +234,65 @@
         font-size: 25px;
         transform: rotate(90deg);
     }
+
+    .grid_x_note_list {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-auto-rows: minmax(50px, auto);
+        grid-gap: 20px;
+        grid-auto-flow: dense;
+        height: auto;
+        justify-content: space-between;
+        margin: 20px 0;
+
+        h2 {
+            font-size: 1rem;
+        }
+
+        button {
+            background: none;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background: #3f3d56;
+            color: white;
+
+        }
+
+        >* {
+            width: auto;
+            height: 240px;
+            margin: 0;
+            background: #EEE;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+
+            justify-content: space-between;
+        }
+
+        .x_note_desc {
+            height: 80px;
+            background: #DDD;
+            padding: 5px;
+            overflow: hidden;
+            border: 0px solid;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .date {
+
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            text-align: right;
+        }
+    }
+
 
     .grid_topic_list {
         width: 100%;
@@ -218,6 +336,45 @@
     .grid_topic_list p:hover {
         background: #3f3d56;
         color: white;
+    }
+
+    .div_comments {
+        width: calc(100% - 200px);
+        max-height: 500px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+
+        p {
+            margin: 10px;
+        }
+
+    }
+
+    .cmt_container {
+        width: 90%;
+        background: none;
+        padding: 15px;
+        border-top: 1px solid;
+        display: flex;
+        flex-direction: column;
+
+
+        .cmt_user {
+            display: flex;
+            flex-direction: row;
+
+            align-items: center;
+            justify-content: start;
+
+
+            >* {
+                margin-left: 15px;
+            }
+        }
+
     }
 
     .notes {

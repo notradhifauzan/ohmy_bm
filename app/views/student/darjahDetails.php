@@ -11,8 +11,8 @@
 </head>
 
 <body>
-   <div class="navbar">
-        <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
+    <div class="navbar">
+        <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img" height="50">
         <h1 style="margin: 0 20px;">Bahan Pembelajaran</h1>
         <div class="tahun_head_container">
             <h1 name="darjah_id">Tahun <?php echo $data['darjahId']; ?></h1>
@@ -22,7 +22,10 @@
     <div class="tahun_details">
         <h2>Silibus Darjah <?php echo $data['darjahId']; ?></h2>
         <div class="t_d_p1_c">
+
             <div class="t_d_p1_c1">
+
+
 
                 <?php if (!empty($data['file'])) : ?>
                     <div class="">
@@ -50,8 +53,9 @@
                     <?php if (!empty($data['fileName_err'])) : ?>
                         <span style="color: red">*<?php echo $data['fileName_err']; ?></span><br>
                     <?php endif ?>
-                    </form>
                 <?php endif; ?>
+
+
             </div>
 
 
@@ -61,9 +65,9 @@
                 </textarea>
             </div>
 
-
-
         </div>
+
+
         <div class="ic_bottom">
             <svg id='Double_Down_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                 <rect width='48' height='48' stroke='none' fill='#000000' opacity='0' />
@@ -73,27 +77,21 @@
             </svg>
         </div>
 
-        <h2>Senarai Bahan Pembelajaran</h2>
-        <div class="t_d_p1_c">
-            <div class="grid_topic_list">
+        <div class="t_d_p2">
+            <h2>Senarai Bahan Pembelajaran</h2>
+            <div class="grid_x_note_list">
 
                 <?php foreach ($data['topicList'] as $topic) : ?>
-                    <div class="card " style="width: fit-content; overflow: hidden;">
-                        <div class="row ">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                        <div class="button-to-topic">
-                                            <button><?php echo $topic->topicName; ?></button>
-                                        </div>
-                                    <p class="card-text"><?php echo $topic->summary; ?></p>
-                                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>">
-                                            <p>
-                                                Muat Turun
-                                            </p>
-                                        </a>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="topic_card">
+                        <h2><?php echo $topic->topicName; ?></h2>
+
+                        <p class="x_note_desc"><?php echo $topic->summary; ?></p>
+                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>">
+                            <button>Muat Turun</button>
+                        </a>
+
+                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong>10 Oct 2022</strong></p>
                     </div>
 
                 <?php endforeach ?>
@@ -103,38 +101,51 @@
             </div>
         </div>
 
-        <div class="t_d_p1_c">
-            <div class="container_1">
-                <div class="comment-container">
-                    <form action="<?php echo URLROOT; ?>/students/addFeedbacks/<?php echo $data['darjahId']; ?>" method="POST">
-                        <div class="avatar"></div>
-                        <input type="text" name="feedback" placeholder="Add a comment.." class="comment-input">
-                        <button type="submit" class="comment-button">
-                            <p class="text">Add comment</p>
-                        </button>
-                    </form>
+        <!-- Div send comment -->
+        <div class="t_d_p3">
+
+            <form action="<?php echo URLROOT; ?>/students/addFeedbacks/<?php echo $data['darjahId']; ?>" method="POST">
+                <h2>Forum</h2>
+                <div class="form_content">
+                    <div class="avatar"></div>
+                    <input type="text" name="feedback" placeholder="Add a comment..">
+                    <button type="submit">Hantar</button>
                 </div>
-            </div>
-            <?php foreach ($data['feedbacks'] as $feedbacks) : ?>
-                <div class="grid_topic_list_1">
-                    <div class="container">
-                        <div class="comment-container">
+            </form>
+
+
+            <div class="div_comments">
+                <?php foreach ($data['feedbacks'] as $feedbacks) : ?>
+
+                    <div class="cmt_container">
+                        <div class="cmt_user">
                             <div class="avatar"></div>
-                            <div class="username" name="">dari <?php echo $feedbacks->username ?> | <?php echo getTimeInterval($feedbacks->date_created); ?></div>
-                            <p type="text" placeholder="Add a comment.." class="comment-input"><?php echo $feedbacks->post; ?></p>
+                            <div class="cmt_username" name="">
+                                dari
+                                <?php echo $feedbacks->username ?>
+                                |
+                                <?php echo getTimeInterval($feedbacks->date_created); ?>
+                            </div>
                         </div>
+
+                        <p type="cmt_text" placeholder="Add a comment.." class="comment-input"><?php echo $feedbacks->post; ?></p>
                     </div>
+
                 <?php endforeach; ?>
 
-                </div>
+            </div>
         </div>
+
     </div>
+
+
     <div class="rtn_btn">
         <a href="<?php echo URLROOT; ?>/students/home">
-            <button>Kembali Ke Halaman Utama </button>
+            <button>Kembali Ke Halaman Utama</button>
         </a>
 
     </div>
+
 </body>
 
 </html>

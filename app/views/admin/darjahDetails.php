@@ -6,15 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    -->
-
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
 
 </head>
 
 <body>
-   
+
 
     <div class="navbar">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
@@ -94,21 +91,21 @@
             </svg>
         </div>
 
-        <h2>Senarai Bahan Pembelajaran</h2>
-        <div class="t_d_p1_c">
-            <div class="grid_topic_list">
+        <div class="t_d_p2">
+            <h2>Senarai Bahan Pembelajaran</h2>
+            <div class="grid_x_note_list">
 
                 <?php foreach ($data['topicList'] as $topic) : ?>
-                    <div class="" style="width: fit-content;">
 
-                        <div class="button-to-topic">
-                            <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?></button></a>
-                        </div>
+                    <div class="topic_card">
+                        <h2><?php echo $topic->topicName; ?></h2>
+
+                        <p class="x_note_desc"><?php echo $topic->summary; ?></p>
                         <a href="<?php echo URLROOT; ?>/admins/deleteMaterials/<?php echo $topic->topicId; ?>?darjahId=<?php echo $data['darjahId']; ?>">
-                            <p>
-                                Padam
-                            </p>
+                            <button>Padam</button>
                         </a>
+
+                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong>10 Oct 2022</strong></p>
                     </div>
                 <?php endforeach ?>
             </div>
@@ -124,8 +121,34 @@
                 </button>
             </a>
         </div>
-    </div>
 
+
+
+        <div class="t_d_p3">
+            <h2>Forum</h2>
+            <div class="div_comments">
+                <?php foreach ($data['feedbacks'] as $feedbacks) : ?>
+
+                    <div class="cmt_container">
+                        <div class="cmt_user">
+                            <div class="avatar"></div>
+                            <div class="cmt_username" name="">
+                                dari
+                                <?php echo $feedbacks->username ?>
+                                |
+                                <?php echo getTimeInterval($feedbacks->date_created); ?>
+                            </div>
+                        </div>
+
+                        <p type="cmt_text" placeholder="Add a comment.." class="comment-input"><?php echo $feedbacks->post; ?></p>
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+    </div>
     <div class="rtn_btn">
         <a href="<?php echo URLROOT; ?>/admins/home">
             <button>Kembali Ke Halaman Utama </button>
