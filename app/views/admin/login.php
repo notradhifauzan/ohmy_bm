@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <title>
         Project
@@ -17,7 +17,20 @@
     </div>
 
     <div class="login-content">
-        <div class="login-div">
+        <div class="login_div">
+
+            <div class="change_user">
+                <a href="<?php echo URLROOT; ?>/students/login/">
+                    <div class="c_u1">
+                        Students
+                    </div>
+                </a>
+                <a href="<?php echo URLROOT; ?>/admins/login/">
+                    <div class="c_u2">
+                        Admin
+                    </div>
+                </a>
+            </div>
 
             <svg id='user-hexagon_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                 <rect width='48' height='48' stroke='none' fill='#000000' opacity='0' />
@@ -44,6 +57,7 @@
             <form action="<?php echo URLROOT ?>/admins/login" method="POST">
                 <div class="form_container">
                     <div class="input">
+
                         <svg id='user-square_48' width='36' height='36' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                             <rect width='48' height='48' stroke='none' fill='#' opacity='0' />
 
@@ -62,6 +76,7 @@
                                 </g>
                             </g>
                         </svg>
+
                         <input value="<?php echo $data['username'] ?>" type="text" placeholder="Masukkan nama pengguna anda" name="username" required>
                     </div>
                     <?php if (!empty($data['username_err'])) : ?>
@@ -88,6 +103,7 @@
                                 </g>
                             </g>
                         </svg>
+
                         <input value="<?php echo $data['password'] ?>" type="password" placeholder="Masukkan kata kunci" name="password" required>
                     </div>
 
@@ -102,4 +118,5 @@
         </div>
     </div>
 </body>
+
 </html>

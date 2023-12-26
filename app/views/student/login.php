@@ -40,7 +40,24 @@
             </svg>
 
             <h2>Selamat Kembali</h2>
-
+            <!-- Update kecantikan -->
+            <div>
+                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/login/">
+                    <button>
+                        Students
+                    </button>
+                </a>
+                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/admins/login/">
+                    <button>
+                        Admin
+                    </button>
+                </a>
+                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/register/">
+                    <button>
+                        Register
+                    </button>
+                </a>
+            </div>
             <form action="<?php echo URLROOT ?>/students/login" method="POST">
                 <div class="form_container">
                     <div class="input">

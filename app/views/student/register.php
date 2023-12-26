@@ -150,10 +150,16 @@
                         <span style="color: red"><?php echo $data['confirm_password_err']; ?></span>
                     <?php endif ?>
 
-                        <button type="submit">Register</button>
-                        
+                    <button type="submit">Register</button>
+
                 </div>
             </form>
+            <!-- Update kecantikan -->
+            <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/login/">
+                <button>
+                    Kembali
+                </button>
+            </a>
         </div>
     </div>
 </body>
