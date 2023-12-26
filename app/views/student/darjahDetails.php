@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="navbar">
+   <div class="navbar">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
         <h1 style="margin: 0 20px;">Bahan Pembelajaran</h1>
         <div class="tahun_head_container">
@@ -23,7 +23,6 @@
         <h2>Silibus Darjah <?php echo $data['darjahId']; ?></h2>
         <div class="t_d_p1_c">
             <div class="t_d_p1_c1">
-                <!-- Dekat sini student boleh download and preview -->
 
                 <?php if (!empty($data['file'])) : ?>
                     <div class="">
@@ -36,7 +35,7 @@
                                     <p>File Name Not Available</p>
                                 <?php endif; ?>
 
-                                <a role="button" href="<?php echo URLROOT; ?>/admins/downloadSOW/<?php echo $data['darjahId']; ?>">
+                                <a role="button" href="<?php echo URLROOT; ?>/students/downloadTextbook/<?php echo $data['darjahId']; ?>">
                                     <embed width="50%" height="50%" /><button type="submit">Muat Turun</button>
                                 </a>
                             </div>
@@ -76,30 +75,33 @@
 
         <h2>Senarai Bahan Pembelajaran</h2>
         <div class="t_d_p1_c">
-
             <div class="grid_topic_list">
 
                 <?php foreach ($data['topicList'] as $topic) : ?>
-                    <div class="button-to-topic">
-                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?>
-                            </button></a>
+                    <div class="card " style="width: fit-content; overflow: hidden;">
+                        <div class="row ">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                        <div class="button-to-topic">
+                                            <button><?php echo $topic->topicName; ?></button>
+                                        </div>
+                                    <p class="card-text"><?php echo $topic->summary; ?></p>
+                                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>">
+                                            <p>
+                                                Muat Turun
+                                            </p>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 <?php endforeach ?>
+
+
 
             </div>
         </div>
-
-           
-            <div class="download_notes">
-                <p>Muat Turun</p>
-
-                <a >
-                    <button name="">
-                        +
-                    </button>
-                </a>
-            </div>
-       
 
         <div class="t_d_p1_c">
             <div class="container_1">

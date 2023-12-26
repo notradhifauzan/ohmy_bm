@@ -102,6 +102,24 @@ class Student
         }
     }
 
+    public function downloadTextbook($darjahId)
+    {
+        $this->db->query('SELECT * FROM darjah WHERE darjahId = :darjahId');
+        $this->db->bind(':darjahId', $darjahId);
+        $result = $this->db->single();
+
+        if ($result) {
+            $data = [
+                'pdfNotes' => $result->pdf_notes,
+                'pdfName' => $result->pdf_name
+            ];
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
     public function addFeedbacks($data)
     {
         $this->db->query('insert into posts (userId,darjahId,post) values (:userId,:darjahId,:post);');

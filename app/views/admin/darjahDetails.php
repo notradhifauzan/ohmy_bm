@@ -6,19 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    -->
+
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
 
 </head>
 
 <body>
+   
+
     <div class="navbar">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
-        <h1 style="margin: 0 20px;">Rujukan</h1>
+        <h1 style="margin: 0 20px;">Bahan Pembelajaran</h1>
         <div class="tahun_head_container">
             <h1 name="darjah_id">Tahun <?php echo $data['darjahId']; ?></h1>
         </div>
     </div>
+
 
     <div class="tahun_details">
         <h2>Silibus Darjah <?php echo $data['darjahId']; ?></h2>
@@ -92,33 +97,32 @@
         <h2>Senarai Bahan Pembelajaran</h2>
         <div class="t_d_p1_c">
             <div class="grid_topic_list">
+
                 <?php foreach ($data['topicList'] as $topic) : ?>
-                    <div class="button-to-topic">
-                        <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?></button></a>
+                    <div class="" style="width: fit-content;">
+
+                        <div class="button-to-topic">
+                            <a href="<?php echo URLROOT; ?>/students/downloadNotes/<?php echo $topic->topicId; ?>"><button><?php echo $topic->topicName; ?></button></a>
+                        </div>
+                        <a href="<?php echo URLROOT; ?>/admins/deleteMaterials/<?php echo $topic->topicId; ?>?darjahId=<?php echo $data['darjahId']; ?>">
+                            <p>
+                                Padam
+                            </p>
+                        </a>
                     </div>
-                    
                 <?php endforeach ?>
             </div>
         </div>
 
-        <div class="notes">
-            <div class="delete_notes">
-                <p>Padam</p>
-                <a>
-                    <button name="remove">
-                        -
-                    </button>
-                </a>
-            </div>
-            <div class="add_notes">
-                <p>Tambah Nota</p>
 
-                <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">
-                    <button name="go-to-add-new">
-                        +
-                    </button>
-                </a>
-            </div>
+        <div class="add_notes">
+            <p>Tambah Nota</p>
+
+            <a href="<?php echo URLROOT; ?>/admins/topicForm/<?php echo $data['darjahId']; ?>">
+                <button name="go-to-add-new">
+                    +
+                </button>
+            </a>
         </div>
     </div>
 
