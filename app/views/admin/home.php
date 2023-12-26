@@ -17,6 +17,14 @@
         </div>
 
         <div style="padding-right: 0">
+
+        <!-- Update kecantikan -->
+            <form action="<?php echo URLROOT ?>/admins/logout">
+                <button type="submit">
+                    Logout
+                </button>
+            </form>
+
             <p>Hai Cikgu</p>
             <a href="userProfile.html">
                 <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" style="margin-left:30px" />

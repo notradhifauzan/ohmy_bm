@@ -18,6 +18,13 @@
         <div style="padding-right: 50px">
             <a href="userProfile.html">
                 <!-- Radhi: span user_name will dynamically changed based on user -->
+
+                <!-- Update kecantikan -->
+                <form action="<?php echo URLROOT ?>/students/logout">
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
                 <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" style="margin-left:30px" />
                 <p>Hai ${user_name}</p>
             </a>
