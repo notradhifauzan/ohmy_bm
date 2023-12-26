@@ -183,6 +183,7 @@
         transform: rotate(90deg);
     }
 
+
     .grid_topic_list {
         width: 100%;
         display: grid;
@@ -192,17 +193,6 @@
         align-items: center;
         justify-content: center;
     }
-
-    .grid_topic_list_1 {
-        width: 100%;
-        display: block;
-        margin: 50px 0;
-        grid-template-columns: auto auto auto;
-        gap: 25px;
-        align-items: center;
-        justify-content: center;
-    }
-
 
     .grid_topic_list button {
         width: 200px;
@@ -218,6 +208,26 @@
         background: #3f3d56;
         color: white;
     }
+
+    .grid_topic_list p {
+        width: auto;
+        height: auto;
+        border: 3px solid;
+        color: #3f3d56;
+        overflow: hidden;
+        font-size: 1.5rem;
+        border-radius: 10px;
+        transition: 300ms;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .grid_topic_list p:hover {
+        background: #3f3d56;
+        color: white;
+    }
+
 
     .download_notes {
         width: 100%;

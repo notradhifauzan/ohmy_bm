@@ -109,6 +109,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        
     }
 
 
@@ -200,6 +201,25 @@
         color: white;
     }
 
+    .grid_topic_list p {
+        width: auto;
+        height: auto;
+        border: 3px solid;
+        color: #3f3d56;
+        overflow: hidden;
+        font-size: 1.5rem;
+        border-radius: 10px;
+        transition: 300ms;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .grid_topic_list p:hover {
+        background: #3f3d56;
+        color: white;
+    }
+
     .notes {
         width: 100%;
         display: flex;
@@ -215,10 +235,10 @@
     }
 
     .delete_notes {
-        width: 100%;
+        width: fit-content;
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: center;
     }
 
     .add_notes button {

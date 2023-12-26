@@ -210,6 +210,26 @@ class Students extends Controller
         }
     }
 
+    public function downloadTextbook($darjahId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->studentModel->downloadTextbook($darjahId);
+
+            if ($data !== false) {
+                // Send appropriate headers for a PDF file
+                header('Content-Type: application/pdf');
+
+                // Use "inline" to view the PDF in the browser
+                // User "attachment" to actually download the PDF file
+                header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '.pdf"');
+                //header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '');
+            } else {
+                // Handle if the record with the specified topicId is not found
+                echo "PDF not found for the given topicId.";
+            }
+        }
+    }
+
     public function addFeedbacks($darjahId)
     {
         $this->isLoggedIn();
