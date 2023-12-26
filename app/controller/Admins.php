@@ -2,6 +2,7 @@
 class Admins extends Controller
 {
     private $adminModel;
+    private $studentModel;
 
     public function __construct()
     {
@@ -79,7 +80,6 @@ class Admins extends Controller
 
     public function deleteMaterials($topicId)
     {
-        //http://localhost:8001/ohmy_bm/admins/deleteMaterials/1?darjahId=1
         $darjahId = $_GET['darjahId'];
         if (!empty($darjahId) && !empty($topicId)) {
             $this->adminModel->deleteMaterials($topicId);
@@ -226,13 +226,15 @@ class Admins extends Controller
     public function darjah($darjahId)
     {
         $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
+        $feedbacks = $this->studentModel->getFeedbacksFromDarjah($darjahId);
 
         $data = [
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
             'file' => $darjahObject->pdf_notes,
-            'file_name' => $darjahObject->pdf_name
+            'file_name' => $darjahObject->pdf_name,
+            'feedbacks' => $feedbacks
         ];
 
         return $this->view('admin/darjahDetails', $data);
