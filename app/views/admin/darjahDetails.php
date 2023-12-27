@@ -50,7 +50,7 @@
 
                 <?php if (empty($data['file'])) : ?>
                     <form action="<?php echo URLROOT; ?>/admins/uploadSOW/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
-                        <h2>Buku Teks Bahasa Melayu Darjah <?php echo $data['darjahId']; ?></h2>
+                        <h2>Buku Teks</h2>
                         <label for="nota-tambahan">
 
                             <div class="ic_upload">
