@@ -43,22 +43,16 @@
 
     input {
         width: 80%;
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 10px;
     }
 
-    #upload-new-file {
-        display: none;
-    }
 
     textarea {
         width: 82.5%;
         font-size: 1rem;
     }
 
-    input[tyype="file"] {
-        width: fit-content;
-    }
 
     form {
         width: 100%;
@@ -120,18 +114,47 @@
 
     .form_c2 {
         width: 50%;
-        margin: 20px 0px 20px 20px;
-        border: 3px dashed #808080;
-        color: #555;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    .form_c2:hover {
+    label {
+        width: 65%;
+        height: 100%;
+        margin: 20px 0px 30px 20px;
+        border: 3px dashed #808080;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        color: #555;
+        transition: 300ms;
+
+        strong {
+            color: #3E86F3;
+            text-decoration: underline;
+        }
+
+        input[type="file"] {
+            width: 70%;
+        }
+    }
+
+    label:hover {
         cursor: pointer;
+        background: #686868;
+        color: #EEE;
+
+
+        strong {
+            color: #EEE;
+            text-decoration: none;
+        }
+
     }
 
     button {

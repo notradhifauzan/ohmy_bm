@@ -34,18 +34,21 @@
 
 
     <div class="tahun_details">
-        <h2>Silibus Darjah <?php echo $data['darjahId']; ?></h2>
+        <h2>Silibus Tahun <?php echo $data['darjahId']; ?></h2>
         <div class="t_d_p1_c">
             <div class="t_d_p1_c1">
 
                 <?php if (!empty($data['file'])) : ?>
-                    <div class="">
-                        <p><?php echo $data['file_name'] ?></p>
-                        <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
-                                Padam
-                            </button>
-                        </a>
-                    </div>
+                    <p><strong>Buku Teks</strong></p>
+                    <label>
+                        <h3>PDF</h3>
+                    </label>
+                    <p style="text-align: center"><strong><?php echo $data['file_name'] ?></strong></p>
+                    <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
+                            Padam
+                        </button>
+                    </a>
+
                 <?php endif; ?>
 
                 <?php if (empty($data['file'])) : ?>
@@ -62,12 +65,12 @@
                                     </g>
                                 </svg>
                             </div>
-
-                            <strong style="color:#8ab4f8; text-decoration: underline;">Click</strong> to add file
+                            <strong style="color:#8ab4f8; text-decoration: underline;">Click</strong>to choose file
+                            <input type="file" name="pdfFile" id="nota-tambahan" accept=".pdf">
 
 
                         </label>
-                        <input type="file" name="pdfFile" id="nota-tambahan" accept=".pdf">
+
 
                         <input type="text" name="fileName" id="fileName" placeholder="Nama buku teks">
                         <button type="submit">Muat Naik</button>

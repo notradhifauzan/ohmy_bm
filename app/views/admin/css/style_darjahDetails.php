@@ -61,14 +61,17 @@
     }
 
     input[type="file"] {
-        display: none;
+        width: 80%;
+        font-size: 10px;
+
     }
 
     label {
-        width: 100%;
+        width: 60%;
+        min-width: 135px;
         max-width: 170px;
         height: 200px;
-        margin: 0;
+        margin: 10%;
         border: 3px dashed #808080;
         color: #555;
 
@@ -81,20 +84,20 @@
 
     label:hover {
         cursor: pointer;
-        background-color: #EEE;
+        background-color: #A0A0A0;
+
     }
 
     button {
         justify-self: center;
-        width: fit-content;
+        width: auto;
         padding: 10px 15px;
         font-size: 1.2rem;
         background: none;
         color: #3f3d56;
         border: 3px solid #555;
         border-radius: 3px;
-        transition: 200ms;
-        background: #FFF;
+        transition: 300ms;
     }
 
 
@@ -152,6 +155,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        >* {
+            margin: 0;
+            margin-bottom: 16px;
+
+        }
     }
 
     .t_d_p1_c2 {
