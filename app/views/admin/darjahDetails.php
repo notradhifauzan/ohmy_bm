@@ -6,14 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
 
 </head>
 
 <body>
 
+    <?php flash('summary_update_success') ?>
+    <?php flash('summary_update_failed') ?>
+    <?php flash('materials_update_success') ?>
+    <?php flash('materials_update_failed') ?>
+    <?php flash('materials_delete_success') ?>
+    <?php flash('materials_delete_failed') ?>
+    <?php flash('delete_textbook_success') ?>
+    <?php flash('delete_textbook_failed') ?>
+    <?php flash('upload_textbook_success') ?>
+    <?php flash('upload_textbook_failed') ?>
 
-    <div class="navbar">
+    <div class="navbar-non-bs">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img">
         <h1 style="margin: 0 20px;">Bahan Pembelajaran</h1>
         <div class="tahun_head_container">
@@ -72,13 +83,12 @@
             </div>
 
             <div class="t_d_p1_c2">
-                <textarea cols="65" rows="10" contenteditable="true">
-                        <?php echo $data['summary']; ?>
-                </textarea>
-                <button style="width: fit-content; margin-left: 14px " name="update-summary">
-                    Ubah Suai
-                </button>
-
+                <form method="POST" action="<?php echo URLROOT; ?>/admins/updateTextbookSummary/<?php echo $data['darjahId']; ?>">
+                    <textarea name="summary" cols="65" rows="10" contenteditable="true"><?php echo $data['summary']; ?></textarea>
+                    <button type="submit" style="width: fit-content; margin-left: 14px " name="update-summary">
+                        Ubah Suai
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -105,7 +115,7 @@
                             <button>Padam</button>
                         </a>
 
-                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong>10 Oct 2022</strong></p>
+                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong><?php echo dateConverter($topic->date_posted) ?></strong></p>
                     </div>
                 <?php endforeach ?>
             </div>
@@ -125,7 +135,7 @@
 
 
         <div class="t_d_p3">
-            <h2>Forum</h2>
+            <h2>Maklum Balas</h2>
             <div class="div_comments">
                 <?php foreach ($data['feedbacks'] as $feedbacks) : ?>
 
