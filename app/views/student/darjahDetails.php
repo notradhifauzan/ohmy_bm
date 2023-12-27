@@ -6,12 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <?php require APPROOT . '/views/student/css/style_darjahDetails.php'; ?>
 
 </head>
 
 <body>
-    <div class="navbar">
+    <?php flash('post_failed'); ?>
+    <?php flash('post_success'); ?>
+    <div class="navbar-non-bs">
         <img src="<?php echo URLROOT ?>/assets/logo.jpg" alt="img" height="50">
         <h1 style="margin: 0 20px;">Bahan Pembelajaran</h1>
         <div class="tahun_head_container">
@@ -60,9 +63,7 @@
 
 
             <div class="t_d_p1_c2">
-                <textarea cols="65" rows="10" readonly>
-                        <?php echo $data['summary']; ?>
-                </textarea>
+                <textarea cols="65" rows="10" readonly><?php echo $data['summary']; ?></textarea>
             </div>
 
         </div>
@@ -91,7 +92,7 @@
                             <button>Muat Turun</button>
                         </a>
 
-                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong>10 Oct 2022</strong></p>
+                        <p style="font-style: italic; font-size: 0.7rem" class="date">dimuat naik pada: <strong><?php echo dateConverter($topic->date_posted) ?></strong></p>
                     </div>
 
                 <?php endforeach ?>
@@ -105,7 +106,7 @@
         <div class="t_d_p3">
 
             <form action="<?php echo URLROOT; ?>/students/addFeedbacks/<?php echo $data['darjahId']; ?>" method="POST">
-                <h2>Forum</h2>
+                <h2>Maklum balas</h2>
                 <div class="form_content">
                     <div class="avatar"></div>
                     <input type="text" name="feedback" placeholder="Add a comment..">

@@ -94,7 +94,7 @@
         scale: 1.05;
     }
 
-    .navbar {
+    .navbar-non-bs {
         width: 95%;
         margin: 15px 0 5px;
         display: flex;

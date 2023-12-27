@@ -267,10 +267,14 @@ class Students extends Controller
             if (empty($data['post_err']) && empty($data['darjahId_err']) && empty($data['userId_err'])) {
                 // proceed to add this feedbacks to database
                 if($this->studentModel->addFeedbacks($data)){
+                    flash('post_success','maklum balas anda berjaya dihantar');
                     redirect('students/darjah/'.$darjahId);
                 } else {
                     die('something went wrong, could not store the feedbacks to the database');
                 }
+            } else {
+                flash('post_failed','sila masukkan maklum balas di dalam ruangan yang disediakan','alert alert-warning');
+                redirect('students/darjah/'.$darjahId);
             }
         }
     }
