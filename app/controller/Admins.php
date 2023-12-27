@@ -59,9 +59,11 @@ class Admins extends Controller
                         $data['pdf_content'] = $fileContent;
                         // Store file information in the database
                         if ($this->adminModel->addTopic($data)) {
-                            $this->darjah($data['darjahId']);
+                            flash('materials_update_success', 'Bahan pembelajaran berjaya dimuat naik');
+                            redirect('admins/darjah/' . $data['darjahId']);
                         } else {
-                            die('failed to stored pdf to database');
+                            flash('materials_update_failed', 'Bahan pembelajaran gagal dimuat naik', 'alert alert-danger');
+                            redirect('admins/darjah/' . $data['darjahId']);
                         }
                     } else {
                         die('invalid file type');
@@ -83,8 +85,13 @@ class Admins extends Controller
     {
         $darjahId = $_GET['darjahId'];
         if (!empty($darjahId) && !empty($topicId)) {
-            $this->adminModel->deleteMaterials($topicId);
-            redirect('admins/darjah/' . $darjahId);
+            if ($this->adminModel->deleteMaterials($topicId)) {
+                flash('materials_delete_success', 'Bahan pembelajaran telah dipadam','alert alert-warning');
+                redirect('admins/darjah/' . $darjahId);
+            } else {
+                flash('materials_delete_failed', 'Bahan pembelajaran gagal dipadam', 'alert alert-danger');
+                redirect('admins/darjah/' . $darjahId);
+            }
         } else {
             die('some values went missing');
         }
@@ -92,8 +99,13 @@ class Admins extends Controller
 
     public function deleteSOW($darjahId)
     {
-        $this->adminModel->deleteSOW($darjahId);
-        redirect('admins/darjah/' . $darjahId);
+        if ($this->adminModel->deleteSOW($darjahId)) {
+            flash('delete_textbook_success', 'Buku teks telah dipadam', 'alert alert-warning');
+            redirect('admins/darjah/' . $darjahId);
+        } else {
+            flash('delete_textbook_failed', 'Buku teks gagal dipadam', 'alert alert-danger');
+            redirect('admins/darjah/' . $darjahId);
+        }
     }
 
     public function uploadSOW($darjahId)
@@ -134,72 +146,20 @@ class Admins extends Controller
 
                         // Store file information in the database
                         if ($this->adminModel->uploadSOW($data)) {
+                            flash('upload_textbook_success', 'Buku teks berjaya dimuat naik');
                             redirect('admins/darjah/' . $darjahId);
                         } else {
-                            die('failed to stored pdf to database');
+                            flash('upload_textbook_failed', 'Buku teks gagal dimuat naik', 'alert alert-danger');
+                            redirect('admins/darjah/' . $darjahId);
                         }
                     } else {
-                        die('invalid file type');
+                        flash('upload_textbook_failed', 'Buku teks gagal dimuat naik', 'alert alert-danger');
+                        redirect('admins/darjah/' . $darjahId);
                     }
                 } else {
                     $data['fileName_err'] = 'Sila masukkan fail';
                     return $this->view('admin/darjahDetails', $data);
                 }
-            }
-        }
-    }
-
-    public function testFetchPdf($topicId)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data = $this->adminModel->testFetchPdf($topicId);
-
-            if ($data !== false) {
-                // Send appropriate headers for a PDF file
-                header('Content-Type: application/pdf');
-
-                // Use "inline" to view the PDF in the browser
-                // User "attachment" to actually download the PDF file
-                header('Content-Disposition: inline; filename="' . $data['pdfName'] . '.pdf"');
-                //header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '');
-
-                // Output the PDF data
-                // actually send this data to view, so that it can be preview
-                echo $data['pdfContent'];
-            } else {
-                // Handle if the record with the specified topicId is not found
-                echo "PDF not found for the given topicId.";
-            }
-        }
-    }
-
-    public function testSubmitPdf()
-    {
-        // need to check first if there is already a pdf for that 'darjah'
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Check if the file was uploaded without errors
-            if ($_FILES['pdfFile']['error'] == UPLOAD_ERR_OK) {
-                // Get the temporary name of the uploaded file
-                $tmpFileName = $_FILES['pdfFile']['tmp_name'];
-
-                // Check if the uploaded file is a PDF
-                $fileType = mime_content_type($tmpFileName);
-                if ($fileType === 'application/pdf') {
-                    // Read the content of the PDF file
-                    $fileContent = file_get_contents($tmpFileName);
-
-                    // Store file information in the database
-                    if ($this->adminModel->testStorePdf($_FILES['pdfFile']['name'], $fileContent)) {
-                        die('successfully stored pdf to database');
-                    } else {
-                        die('failed to stored pdf to database');
-                    }
-                } else {
-                    die('invalid file type');
-                }
-            } else {
-                // Handle upload errors
-                die('upload errors');
             }
         }
     }
@@ -239,6 +199,24 @@ class Admins extends Controller
         ];
 
         return $this->view('admin/darjahDetails', $data);
+    }
+
+    public function updateTextbookSummary($darjahId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'darjahId' => $darjahId,
+                'summary' => trim($_POST['summary'])
+            ];
+
+            if ($this->adminModel->updateTextbookSummary($data)) {
+                flash('summary_update_success', 'Huraian buku teks berjaya dikemaskini');
+                redirect('admins/darjah/' . $darjahId);
+            } else {
+                flash('summary_update_failed', 'Huraian buku teks gagal dikemaskini', 'alert alert-danger');
+                redirect('admins/darjah/' . $darjahId);
+            }
+        }
     }
 
     public function login()
@@ -320,4 +298,3 @@ class Admins extends Controller
         redirect('admins/login');
     }
 }
-

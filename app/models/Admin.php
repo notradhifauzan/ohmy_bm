@@ -44,7 +44,7 @@ class Admin
     {
         $this->db->query('delete from topic where topicId=:topicId;');
         $this->db->bind(':topicId',$topicId);
-        $this->db->execute();
+        return $this->db->execute();
     }
 
     public function testStorePdf($topicName, $fileContent)
@@ -102,7 +102,7 @@ class Admin
 
     public function topicList($darjahId)
     {
-        $this->db->query('select * from topic where darjahId=:darjahId;');
+        $this->db->query('select * from topic where darjahId=:darjahId order by date_posted DESC;');
         $this->db->bind(':darjahId', $darjahId);
         $this->db->execute();
 
@@ -126,6 +126,15 @@ class Admin
         } else {
             return false;
         }
+    }
+
+    public function updateTextbookSummary($data)
+    {
+        $this->db->query('update darjah set summary = :summary where darjahId=:darjahId;');
+        $this->db->bind(':summary',$data['summary']);
+        $this->db->bind(':darjahId',$data['darjahId']);
+
+        return $this->db->execute();
     }
 
     public function findAdminById($adminid)
