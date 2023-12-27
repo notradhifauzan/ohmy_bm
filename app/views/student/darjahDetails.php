@@ -52,7 +52,7 @@
                 <?php endif; ?>
 
                 <?php if (empty($data['file'])) : ?>
-                    <h4>Tiada buku teks dimuat naik</h4>
+                    <h4>Buku Teks Tiada</h4>
                     <?php if (!empty($data['fileName_err'])) : ?>
                         <span style="color: red">*<?php echo $data['fileName_err']; ?></span><br>
                     <?php endif ?>

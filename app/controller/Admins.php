@@ -26,11 +26,14 @@ class Admins extends Controller
             'pdf_content' => '',
             'summary' => '',
             'fileName' => '',
+            'date_created' => '',
 
             'topicName_err' => '',
             'pdf_content_err' => '',
             'summary_err' => '',
-            'fileName_err' => ''
+            'fileName_err' => '',
+            'date_created_err' => ''
+            
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

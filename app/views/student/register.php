@@ -17,8 +17,26 @@
         <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
     </div>
 
-    <div class="login-content">
-        <div class="login-div">
+    <div class="register-content">
+        <div class="register_div">
+
+            <div class="change_user">
+                <a href="<?php echo URLROOT; ?>/students/register/">
+                    <div class="c_u1">
+                        Register
+                    </div>
+                </a>
+                <a href="<?php echo URLROOT; ?>/students/login/">
+                    <div class="c_u1">
+                        Students
+                    </div>
+                </a>
+                <a href="<?php echo URLROOT; ?>/admins/login/">
+                    <div class="c_u2">
+                        Admin
+                    </div>
+                </a>
+            </div>
 
             <svg id='user-hexagon_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                 <rect width='48' height='48' stroke='none' fill='#000000' opacity='0' />
@@ -43,7 +61,7 @@
             <h2>Mari Berdaftar</h2>
 
             <form action="<?php echo URLROOT ?>/students/register" method="POST">
-                <div class="formcontainer">
+                <div class="form_container">
                     <div class="input">
                         <svg id='user-square_48' width='36' height='36' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                             <rect width='48' height='48' stroke='none' fill='#' opacity='0' />
@@ -154,12 +172,6 @@
 
                 </div>
             </form>
-            <!-- Update kecantikan -->
-            <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/login/">
-                <button>
-                    Kembali
-                </button>
-            </a>
         </div>
     </div>
 </body>

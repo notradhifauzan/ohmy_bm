@@ -48,7 +48,7 @@
     }
 
     #upload-new-file {
-        display: display;
+        display: none;
     }
 
     textarea {

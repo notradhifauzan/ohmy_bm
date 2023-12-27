@@ -11,22 +11,17 @@
 <body>
 
     <div class="navbar">
-        <div style="padding: 0 60px">
-            <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
-        </div>
+        <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
 
-        <div style="padding-right: 50px">
+        <div class="logout">
+            <form action="<?php echo URLROOT ?>/students/logout">
+                <button type="submit">
+                    Logout
+                </button>
+            </form>
+
             <a href="userProfile.html">
-                <!-- Radhi: span user_name will dynamically changed based on user -->
-
-                <!-- Update kecantikan -->
-                <form action="<?php echo URLROOT ?>/students/logout">
-                    <button type="submit">
-                        Logout
-                    </button>
-                </form>
-                <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" style="margin-left:30px" />
-                <p>Hai ${user_name}</p>
+                <img src="<?php echo URLROOT; ?>/assets/user_icon.svg" alt="user_icon" />
             </a>
         </div>
     </div>
@@ -37,8 +32,6 @@
             <h1>Puncak Kreatif Bahasa</h1>
             <h2>Tingkatkan kemahiran Bahasa Melayu</h2>
             <p class="a_h_p1_p">Selamat datang ke laman web Puncak Kreatif Bahasa kami! Kami bertujuan meningkatkan kemahiran Bahasa Melayu melalui bahan pembelajaran menarik dan interaktif untuk semua peringkat umur.</p>
-
-            <a><button>Info Lanjut</button></a>
         </div>
 
         <img id="home_flat_art" src="<?php echo URLROOT; ?>/assets/home_flat_art.svg" alt="flat_art" />
@@ -46,6 +39,8 @@
     </div>
 
     <div class="stu_home_p2">
+
+        <img src="<?php echo URLROOT; ?>/assets/home_flat_art2.svg" alt="flat_art" />
 
         <div class="home_p2_list_button">
 
@@ -57,8 +52,6 @@
             <a href="<?php echo URLROOT; ?>/students/darjah/5"><button>Darjah 5</button></a>
             <a href="<?php echo URLROOT; ?>/students/darjah/6"><button>Darjah 6</button></a>
         </div>
-
-        <img src="<?php echo URLROOT; ?>/assets/home_part2.svg" alt=home__p2>
 
     </div>
 </body>

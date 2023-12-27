@@ -17,7 +17,25 @@
     </div>
 
     <div class="login-content">
-        <div class="login-div">
+        <div class="login_div">
+            
+            <div class="change_user">
+                <a href="<?php echo URLROOT; ?>/students/register/">
+                    <div class="c_u1">
+                        Register
+                    </div>
+                </a>
+                <a href="<?php echo URLROOT; ?>/students/login/">
+                    <div class="c_u1">
+                        Students
+                    </div>
+                </a>
+                <a href="<?php echo URLROOT; ?>/admins/login/">
+                    <div class="c_u2">
+                        Admin
+                    </div>
+                </a>
+            </div>
 
             <svg id='user-hexagon_48' width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
                 <rect width='48' height='48' stroke='none' fill='#000000' opacity='0' />
@@ -40,24 +58,7 @@
             </svg>
 
             <h2>Selamat Kembali</h2>
-            <!-- Update kecantikan -->
-            <div>
-                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/login/">
-                    <button>
-                        Students
-                    </button>
-                </a>
-                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/admins/login/">
-                    <button>
-                        Admin
-                    </button>
-                </a>
-                <a style="margin: 10px;" href="<?php echo URLROOT; ?>/students/register/">
-                    <button>
-                        Register
-                    </button>
-                </a>
-            </div>
+
             <form action="<?php echo URLROOT ?>/students/login" method="POST">
                 <div class="form_container">
                     <div class="input">
