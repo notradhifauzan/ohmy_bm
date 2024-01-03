@@ -12,7 +12,7 @@ class Students extends Controller
         if (isset($_SESSION['current_controller'])) {
             unset($_SESSION['current_controller']);
         }
-        $_SESSION['current_controller'] = 'student';
+        $_SESSION['current_controller'] = 'students';
     }
 
     public function index()
@@ -182,8 +182,8 @@ class Students extends Controller
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
-            'file' => $darjahObject->pdf_notes,
             'file_name' => $darjahObject->pdf_name,
+            'tajuk' => $darjahObject->tajuk,
             'feedbacks' => $feedbacks
         ];
 
@@ -195,17 +195,23 @@ class Students extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data = $this->studentModel->downloadNotes($topicId);
 
-            if ($data !== false) {
-                // Send appropriate headers for a PDF file
-                header('Content-Type: application/pdf');
+            if (!empty($data)) {
+                $file_path = 'notes/' . $data->pdf_name;
+                if (file_exists($file_path)) {
+                    // Set appropriate headers
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename=' . basename($file_path));
+                    header('Content-Length: ' . filesize($file_path));
 
-                // Use "inline" to view the PDF in the browser
-                // User "attachment" to actually download the PDF file
-                header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '.pdf"');
-                //header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '');
+                    // Read the file and output it to the browser
+                    readfile($file_path);
+                    exit;
+                } else {
+                    echo 'File not found.';
+                }
             } else {
                 // Handle if the record with the specified topicId is not found
-                echo "PDF not found for the given topicId.";
+                echo "no content found";
             }
         }
     }
@@ -214,15 +220,20 @@ class Students extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data = $this->studentModel->downloadTextbook($darjahId);
-
             if ($data !== false) {
-                // Send appropriate headers for a PDF file
-                header('Content-Type: application/pdf');
+                $file_path = 'textbooks/' . $data['pdfName'];
+                if (file_exists($file_path)) {
+                    // Set appropriate headers
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename=' . basename($file_path));
+                    header('Content-Length: ' . filesize($file_path));
 
-                // Use "inline" to view the PDF in the browser
-                // User "attachment" to actually download the PDF file
-                header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '.pdf"');
-                //header('Content-Disposition: attachment; filename="' . $data['pdfName'] . '');
+                    // Read the file and output it to the browser
+                    readfile($file_path);
+                    exit;
+                } else {
+                    echo 'File not found.';
+                }
             } else {
                 // Handle if the record with the specified topicId is not found
                 echo "PDF not found for the given topicId.";
@@ -266,15 +277,15 @@ class Students extends Controller
 
             if (empty($data['post_err']) && empty($data['darjahId_err']) && empty($data['userId_err'])) {
                 // proceed to add this feedbacks to database
-                if($this->studentModel->addFeedbacks($data)){
-                    flash('post_success','maklum balas anda berjaya dihantar');
-                    redirect('students/darjah/'.$darjahId);
+                if ($this->studentModel->addFeedbacks($data)) {
+                    flash('post_success', 'maklum balas anda berjaya dihantar');
+                    redirect('students/darjah/' . $darjahId);
                 } else {
                     die('something went wrong, could not store the feedbacks to the database');
                 }
             } else {
-                flash('post_failed','sila masukkan maklum balas di dalam ruangan yang disediakan','alert alert-warning');
-                redirect('students/darjah/'.$darjahId);
+                flash('post_failed', 'sila masukkan maklum balas di dalam ruangan yang disediakan', 'alert alert-warning');
+                redirect('students/darjah/' . $darjahId);
             }
         }
     }

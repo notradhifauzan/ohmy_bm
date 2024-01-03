@@ -16,70 +16,100 @@ class Admins extends Controller
          */
         $this->adminModel = $this->model('Admin');
         $this->studentModel = $this->model('Student');
+
+        if(isset($_SESSION['current_controller']))
+        {
+            unset($_SESSION['current_controller']);
+        }
+        $_SESSION['current_controller'] = 'admins';
     }
 
     public function topicForm($darjahId)
     {
-        $data = [
-            'topicName' => '',
-            'darjahId' => $darjahId,
-            'pdf_content' => '',
-            'summary' => '',
-            'fileName' => '',
-            'date_created' => '',
-
-            'topicName_err' => '',
-            'pdf_content_err' => '',
-            'summary_err' => '',
-            'fileName_err' => '',
-            'date_created_err' => ''
-            
-        ];
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // check necessary error:
-            if (empty($_POST['topicName'])) {
-                $data['topicName_err'] = 'Sila masukkan tajuk';
-            } else {
-                $data['topicName'] = $_POST['topicName'];
+            $fileDestination = '';
+            $fileTmpName = '';
+            $fileNameNew = '';
+
+            $data = [
+                'topicName' => trim($_POST['topicName']),
+                'topicName_err' => '',
+                'darjahId' => $darjahId,
+                'uniqueFileName' => '',
+                'summary' => trim($_POST['summary']),
+                'summary_err' => ''
+            ];
+
+            if (empty($data['topicName'])) {
+                $data['topicName_err'] = 'Sila nyatakan nama nota tambahan';
             }
 
-            if (empty($_POST['summary'])) {
-                $data['summary_err'] = 'Sila masukkan huraian';
-            } else {
-                $data['summary'] = $_POST['summary'];
+            if (empty($data['summary'])) {
+                $data['summary_err'] = 'Sila nyatakan huraian nota tambahan';
             }
 
-            if (empty($data['summary_err']) && empty($data['topicName_err'])) {
-                // if not empty then we can proceed with file processing
-                if ($_FILES['pdfFile']['error'] == UPLOAD_ERR_OK) {
-                    $tmpFileName = $_FILES['pdfFile']['tmp_name'];
-                    // Check if the uploaded file is a PDF
-                    $fileType = mime_content_type($tmpFileName);
-                    if ($fileType === 'application/pdf') {
-                        // Read the content of the PDF file
-                        $fileContent = file_get_contents($tmpFileName);
-                        $data['pdf_content'] = $fileContent;
-                        // Store file information in the database
-                        if ($this->adminModel->addTopic($data)) {
-                            flash('materials_update_success', 'Bahan pembelajaran berjaya dimuat naik');
-                            redirect('admins/darjah/' . $data['darjahId']);
-                        } else {
-                            flash('materials_update_failed', 'Bahan pembelajaran gagal dimuat naik', 'alert alert-danger');
-                            redirect('admins/darjah/' . $data['darjahId']);
-                        }
+            if (!empty($data['topicName']) && !empty($data['summary'])) {
+                // proceed to check the file
+                // use topic name as the 'main' name in database
+                if ($_FILES['pdfFile']['error'] != 4 || ($_FILES['pdfFile']['size'] != 0 && $_FILES['pdfFile']['error'] != 0)) {
+                    $fileName = $_FILES['pdfFile']['name'];
+                    $fileTmpName = $_FILES['pdfFile']['tmp_name'];
+                    $fileSize = $_FILES['pdfFile']['size'];
+                    $fileError = $_FILES['pdfFile']['error'];
+
+                    $maxFileSize = 500 * 1024 * 1024; // 500 MB in bytes
+
+                    $fileExt = explode('.', $fileName);
+                    $fileActualExt = strtolower(end($fileExt));
+
+                    $allowed = array('pdf', 'docx');
+
+                    if (!in_array($fileActualExt, $allowed)) {
+                        $data['fileName_err'] = 'Format fail tidak sah. hanya format pdf dan docx sahaja yang dibenarkan';
                     } else {
-                        die('invalid file type');
+                        if ($fileError === 0) {
+                            if ($fileSize < $maxFileSize) {
+                                $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                                $fileDestination = 'notes/' . $fileNameNew;
+                                $data['uniqueFileName'] = $fileNameNew;
+                            } else {
+                                $data['topicName_err'] = 'Saiz fail terlalu besar';
+                            }
+                        } else {
+                            $data['topicName_err'] = 'Muat naik fail tidak berjaya';
+                        }
                     }
                 } else {
-                    $data['fileName_err'] = 'Sila masukkan fail';
+                    $data['topicName_err'] = 'Sila muat naik nota tambahan';
+                }
+
+                if (empty($data['topicName_err'])) {
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    if ($this->adminModel->uploadNotes($data)) {
+                        flash('upload_textbook_success', 'Nota tambahan berjaya dimuat naik');
+                        redirect('admins/darjah/' . $darjahId);
+                    } else {
+                        //load view with errors
+                        flash('upload_textbook_failed', 'Nota tambahan gagal dimuat naik', 'alert alert-danger');
+                        redirect('admins/darjah/' . $darjahId);
+                    }
+                } else {
                     return $this->view('admin/topicForm', $data);
                 }
             } else {
-                // load views with error
                 return $this->view('admin/topicForm', $data);
             }
         } else {
+            $data = [
+                'topicName' => '',
+                'darjahId' => $darjahId,
+                'topicName_err' => '',
+                'summary' => '',
+                'summary_err' => '',
+                'pdf_file' => '',
+                'pdf_file_err' => ''
+            ];
+
             return $this->view('admin/topicForm', $data);
         }
     }
@@ -87,9 +117,11 @@ class Admins extends Controller
     public function deleteMaterials($topicId)
     {
         $darjahId = $_GET['darjahId'];
+        $noteObject = $this->adminModel->getNotes($topicId);
+        $fileDestination = 'notes/' . $noteObject->pdf_name;
         if (!empty($darjahId) && !empty($topicId)) {
-            if ($this->adminModel->deleteMaterials($topicId)) {
-                flash('materials_delete_success', 'Bahan pembelajaran telah dipadam','alert alert-warning');
+            if ($this->adminModel->deleteMaterials($topicId) && unlink($fileDestination)) {
+                flash('materials_delete_success', 'Bahan pembelajaran telah dipadam', 'alert alert-warning');
                 redirect('admins/darjah/' . $darjahId);
             } else {
                 flash('materials_delete_failed', 'Bahan pembelajaran gagal dipadam', 'alert alert-danger');
@@ -111,6 +143,92 @@ class Admins extends Controller
         }
     }
 
+    public function deleteTextBook($darjahId)
+    {
+        $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
+        $fileDestination = 'textbooks/' . $darjahObject->pdf_name;
+        if ($this->adminModel->deleteSOW($darjahId) && unlink($fileDestination)) {
+            flash('delete_textbook_success', 'Buku teks telah dipadam', 'alert alert-warning');
+            redirect('admins/darjah/' . $darjahId);
+        } else {
+            flash('delete_textbook_failed', 'Buku teks gagal dipadam', 'alert alert-danger');
+            redirect('admins/darjah/' . $darjahId);
+        }
+    }
+
+    public function uploadTextBook($darjahId)
+    {
+        $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
+
+        $fileDestination = '';
+        $fileTmpName = '';
+        $fileNameNew = '';
+
+        $data = [
+            'darjahId' => $darjahId,
+            'topicList' => $this->adminModel->topicList($darjahId),
+            'summary' => $darjahObject->summary,
+            //'file' => $darjahObject->pdf_notes,
+            'fileName' => trim($_POST['fileName']),
+            'fileContent' => '',
+            'uniqueFileName' => '',
+
+            'fileName_err' => ''
+        ];
+
+        if (empty($data['fileName'])) {
+            $data['fileName_err'] = 'Sila masukkan tajuk';
+        }
+
+        if ($_FILES['pdfFile']['error'] != 4 || ($_FILES['pdfFile']['size'] != 0 && $_FILES['pdfFile']['error'] != 0)) {
+            $fileName = $_FILES['pdfFile']['name'];
+            $fileTmpName = $_FILES['pdfFile']['tmp_name'];
+            $fileSize = $_FILES['pdfFile']['size'];
+            $fileError = $_FILES['pdfFile']['error'];
+
+            $maxFileSize = 500 * 1024 * 1024; // 500 MB in bytes
+
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array('pdf', 'docx');
+
+            if (!in_array($fileActualExt, $allowed)) {
+                $data['fileName_err'] = 'Format fail tidak sah. hanya format pdf dan docx sahaja yang dibenarkan';
+            } else {
+                if ($fileError === 0) {
+                    if ($fileSize < $maxFileSize) {
+                        $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                        $fileDestination = 'textbooks/' . $fileNameNew;
+                        $data['uniqueFileName'] = $fileNameNew;
+                    } else {
+                        $data['fileName_err'] = 'Saiz fail terlalu besar';
+                    }
+                } else {
+                    $data['fileName_err'] = 'Muat naik fail tidak berjaya';
+                }
+            }
+        } else {
+            $data['fileName_err'] = 'Sila muat naik buku teks';
+        }
+
+        if (empty($data['fileName_err'])) {
+            move_uploaded_file($fileTmpName, $fileDestination);
+            if ($this->adminModel->uploadSOW($data)) {
+                flash('upload_textbook_success', 'Buku teks berjaya dimuat naik');
+                redirect('admins/darjah/' . $darjahId);
+            } else {
+                //load view with errors
+                flash('upload_textbook_failed', 'Buku teks gagal dimuat naik', 'alert alert-danger');
+                redirect('admins/darjah/' . $darjahId);
+            }
+        } else {
+            flash('upload_textbook_failed', 'Buku teks gagal dimuat naik', 'alert alert-danger');
+            $data['fileName_err'] = 'Sila masukkan fail';
+            return $this->view('admin/darjahDetails', $data);
+        }
+    }
+
     public function uploadSOW($darjahId)
     {
         $darjahObject = $this->adminModel->getDarjahDetails($darjahId);
@@ -119,7 +237,6 @@ class Admins extends Controller
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
-            'file' => $darjahObject->pdf_notes,
             'fileName' => '',
             'fileContent' => '',
 
@@ -160,6 +277,7 @@ class Admins extends Controller
                         redirect('admins/darjah/' . $darjahId);
                     }
                 } else {
+                    flash('upload_textbook_failed', 'Buku teks gagal dimuat naik', 'alert alert-danger');
                     $data['fileName_err'] = 'Sila masukkan fail';
                     return $this->view('admin/darjahDetails', $data);
                 }
@@ -196,7 +314,7 @@ class Admins extends Controller
             'darjahId' => $darjahId,
             'topicList' => $this->adminModel->topicList($darjahId),
             'summary' => $darjahObject->summary,
-            'file' => $darjahObject->pdf_notes,
+            'tajuk' => $darjahObject->tajuk,
             'file_name' => $darjahObject->pdf_name,
             'feedbacks' => $feedbacks
         ];
@@ -292,6 +410,7 @@ class Admins extends Controller
             $this->view('admin/login', $data);
         }
     }
+
     public function logout()
     {
         if (isset($_SESSION['current_user'])) {

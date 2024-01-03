@@ -30,13 +30,13 @@
 
 
 
-                <?php if (!empty($data['file'])) : ?>
+                <?php if (!empty($data['file_name'])) : ?>
                     <div class="">
 
-                        <?php if (!empty($data['file'])) : ?>
+                        <?php if (!empty($data['file_name'])) : ?>
                             <div>
                                 <?php if (isset($data['file_name'])) : ?>
-                                    <p><?php echo $data['file_name']; ?></p>
+                                    <p><?php echo $data['tajuk']; ?></p>
                                 <?php else : ?>
                                     <p>File Name Not Available</p>
                                 <?php endif; ?>
@@ -51,7 +51,7 @@
                     </div>
                 <?php endif; ?>
 
-                <?php if (empty($data['file'])) : ?>
+                <?php if (empty($data['file_name'])) : ?>
                     <h4>Buku Teks Tiada</h4>
                     <?php if (!empty($data['fileName_err'])) : ?>
                         <span style="color: red">*<?php echo $data['fileName_err']; ?></span><br>
