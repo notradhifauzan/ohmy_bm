@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Utama</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <?php require APPROOT . '/views/student/css/style_home.php'; ?>
 </head>
 
 <body>
-
-    <div class="navbar">
+    <?php require APPROOT . '/views/include/navbar.php'; ?>
+    <div class="navbar-no-bs">
         <img src="<?php echo URLROOT; ?>/assets/logo_n_title.svg" alt="logo Bing" />
 
         <div class="logout">

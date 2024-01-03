@@ -29,7 +29,7 @@
     p {
         font-size: 1rem;
     }
-    .navbar {
+    .navbar-no-bs {
         padding: 15px;
         display: flex;
         flex-direction: row;

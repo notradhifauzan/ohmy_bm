@@ -25,13 +25,13 @@ class Admin
         }
     }
 
-    public function addTopic($data)
+    public function uploadNotes($data)
     {
-        $this->db->query('INSERT INTO topic (topicName, darjahId, pdf_content, summary) VALUES (:topicName, :darjahId, :pdf_content, :summary)');
+        $this->db->query('INSERT INTO topic (topicName, darjahId, pdf_name, summary) VALUES (:topicName, :darjahId, :pdf_name, :summary)');
         $this->db->bind(':topicName', $data['topicName']);
         $this->db->bind(':darjahId', $data['darjahId']);
         $this->db->bind(':summary', $data['summary']);
-        $this->db->bind(':pdf_content', $data['pdf_content'], PDO::PARAM_LOB);
+        $this->db->bind(':pdf_name', $data['uniqueFileName']);
 
         if ($this->db->execute()) {
             return true;
@@ -74,9 +74,9 @@ class Admin
 
     public function deleteSOW($darjahId)
     {
-        $this->db->query('update darjah set pdf_name=:pdf_name, pdf_notes=:pdf_content where darjahId=:darjahId;');
+        $this->db->query('update darjah set pdf_name=:pdf_name, tajuk=:tajuk where darjahId=:darjahId;');
         $this->db->bind(':pdf_name',null);
-        $this->db->bind(':pdf_content',null);
+        $this->db->bind(':tajuk',null);
         $this->db->bind(':darjahId',$darjahId);
 
         if ($this->db->execute()) {
@@ -88,9 +88,9 @@ class Admin
 
     public function uploadSOW($data)
     {
-        $this->db->query('update darjah set pdf_name=:pdf_name, pdf_notes=:pdf_content where darjahId=:darjahId;');
-        $this->db->bind(':pdf_name', $data['fileName']);
-        $this->db->bind(':pdf_content', $data['fileContent']);
+        $this->db->query('update darjah set pdf_name=:pdf_name, tajuk=:tajuk where darjahId=:darjahId;');
+        $this->db->bind(':pdf_name', $data['uniqueFileName']);
+        $this->db->bind(':tajuk', $data['fileName']);
         $this->db->bind(':darjahId', $data['darjahId']);
 
         if ($this->db->execute()) {
@@ -98,6 +98,13 @@ class Admin
         } else {
             return false;
         }
+    }
+
+    public function getNotes($noteId)
+    {
+        $this->db->query('select * from topic where topicId=:noteId');
+        $this->db->bind(':noteId',$noteId);
+        return $this->db->single();
     }
 
     public function topicList($darjahId)

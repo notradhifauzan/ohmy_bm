@@ -78,7 +78,7 @@ class Student
         WHERE posts.darjahId = :darjahId
         ORDER BY posts.date_created DESC;');
 
-        $this->db->bind(':darjahId',$darjahId);
+        $this->db->bind(':darjahId', $darjahId);
         $this->db->execute();
 
         return $this->db->resultSet();
@@ -88,18 +88,7 @@ class Student
     {
         $this->db->query('SELECT * FROM topic WHERE topicId = :topicId');
         $this->db->bind(':topicId', $topicId);
-        $result = $this->db->single();
-
-        if ($result) {
-            $data = [
-                'pdfContent' => $result->pdf_content,
-                'pdfName' => $result->topicName
-            ];
-
-            return $data;
-        } else {
-            return false;
-        }
+        return $this->db->single();
     }
 
     public function downloadTextbook($darjahId)
@@ -110,7 +99,6 @@ class Student
 
         if ($result) {
             $data = [
-                'pdfNotes' => $result->pdf_notes,
                 'pdfName' => $result->pdf_name
             ];
 
@@ -123,11 +111,11 @@ class Student
     public function addFeedbacks($data)
     {
         $this->db->query('insert into posts (userId,darjahId,post) values (:userId,:darjahId,:post);');
-        $this->db->bind(':userId',$data['userId']);
-        $this->db->bind(':darjahId',$data['darjahId']);
-        $this->db->bind(':post',$data['post']);
+        $this->db->bind(':userId', $data['userId']);
+        $this->db->bind(':darjahId', $data['darjahId']);
+        $this->db->bind(':post', $data['post']);
 
-        if($this->db->execute()){
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;

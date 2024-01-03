@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Topik</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <?php require APPROOT . '/views/admin/css/style_darjahDetails.php'; ?>
 
 </head>
 
 <body>
-
     <?php flash('summary_update_success') ?>
     <?php flash('summary_update_failed') ?>
     <?php flash('materials_update_success') ?>
@@ -38,21 +38,21 @@
         <div class="t_d_p1_c">
             <div class="t_d_p1_c1">
 
-                <?php if (!empty($data['file'])) : ?>
+                <?php if (!empty($data['file_name'])) : ?>
                     <p><strong>Buku Teks</strong></p>
                     <label>
                         <h3>PDF</h3>
                     </label>
-                    <p style="text-align: center"><strong><?php echo $data['file_name'] ?></strong></p>
-                    <a role="button" href="<?php echo URLROOT; ?>/admins/deleteSOW/<?php echo $data['darjahId']; ?>"><button>
+                    <p style="text-align: center"><strong><?php echo $data['tajuk'] ?></strong></p>
+                    <a role="button" href="<?php echo URLROOT; ?>/admins/deleteTextBook/<?php echo $data['darjahId']; ?>"><button>
                             Padam
                         </button>
                     </a>
 
                 <?php endif; ?>
 
-                <?php if (empty($data['file'])) : ?>
-                    <form action="<?php echo URLROOT; ?>/admins/uploadSOW/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
+                <?php if (empty($data['file_name'])) : ?>
+                    <form action="<?php echo URLROOT; ?>/admins/uploadTextBook/<?php echo $data['darjahId']; ?>" method="POST" enctype="multipart/form-data">
                         <h2>Buku Teks</h2>
                         <label for="nota-tambahan">
 
